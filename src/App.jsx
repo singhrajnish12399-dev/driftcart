@@ -39,7 +39,11 @@ onChange={(e) => setSearch(e.target.value)}
 />
       <p>Welcome to my shopping app</p>
 
-      {products.map((product) => (
+      {products
+  .filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  )
+  .map((product) => (
         <div
   key={product.id}
   style={{
