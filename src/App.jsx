@@ -27,6 +27,8 @@ const [search, setSearch] = React.useState("");
 <input
   type="text"
   placeholder="🔍 Search products..."
+value={search}
+onChange={(e) => setSearch(e.target.value)}
   style={{
     width: "100%",
     padding: "12px",
