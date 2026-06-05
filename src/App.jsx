@@ -68,7 +68,10 @@ onChange={(e) => setSearch(e.target.value)}
           <h3>{product.name}</h3>
           <p>{product.price}</p>
           <button
-  onClick={() => setCartCount(cartCount + 1)}
+  onClick={() => {
+  setCartCount(cartCount + 1);
+  setCartItems([...cartItems, product]);
+}}
   style={{
     background: "#2874f0",
     color: "white",
