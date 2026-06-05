@@ -20,6 +20,7 @@ const [cartCount, setCartCount] = React.useState(0);
 >
   <h1>DriftCart</h1>
   <p>Your Shopping Destination</p>
+<p>🛒 Cart: {cartCount}</p>
 </div>
 <input
   type="text"
