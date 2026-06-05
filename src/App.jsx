@@ -21,7 +21,10 @@ const [search, setSearch] = React.useState("");
     marginBottom: "20px"
   }}
 >
-  <h1>DriftCart</h1>
+  <h1>🛒 DriftCart</h1>
+<p style={{ marginTop: "-10px" }}>
+  Shop Smart, Shop Fast
+</p>
   <p>Your Shopping Destination</p>
 <p>🛒 Cart: {cartCount}</p>
 {cartItems.map((item, index) => (
