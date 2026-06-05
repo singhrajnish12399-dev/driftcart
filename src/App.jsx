@@ -6,7 +6,7 @@ const [search, setSearch] = React.useState("");
     { id: 1, name: "T-Shirt", price: "₹499", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" },
     { id: 2, name: "Shoes", price: "₹1499", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff" },
     { id: 3, name: "Watch", price: "₹999", image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49" },
-    { id: 4, name: "Headphones", price: "₹1999" }
+    { id: 4, name: "Headphones", price: "₹1999", image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e" }
   ];
 
   return (
