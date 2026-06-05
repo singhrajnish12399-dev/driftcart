@@ -4,7 +4,7 @@ const [cartCount, setCartCount] = React.useState(0);
 const [search, setSearch] = React.useState("");
   const products = [
     { id: 1, name: "T-Shirt", price: "₹499", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" },
-    { id: 2, name: "Shoes", price: "₹1499" },
+    { id: 2, name: "Shoes", price: "₹1499", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff" },
     { id: 3, name: "Watch", price: "₹999" },
     { id: 4, name: "Headphones", price: "₹1999" }
   ];
