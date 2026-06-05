@@ -8,7 +8,18 @@ function App() {
 
   return (
     <div>
-      <h1>DriftCart</h1>
+      <div
+  style={{
+    background: "#2874f0",
+    color: "white",
+    padding: "15px",
+    borderRadius: "10px",
+    marginBottom: "20px"
+  }}
+>
+  <h1>DriftCart</h1>
+  <p>Your Shopping Destination</p>
+</div>
       <p>Welcome to my shopping app</p>
 
       {products.map((product) => (
