@@ -1,6 +1,7 @@
 import React from "react";
 function App() {
 const [cartCount, setCartCount] = React.useState(0);
+const [cartItems, setCartItems] = React.useState([]);
 const [search, setSearch] = React.useState("");
   const products = [
     { id: 1, name: "T-Shirt", price: "₹499", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" },
