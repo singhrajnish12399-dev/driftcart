@@ -34,7 +34,15 @@ function App() {
       <p>Welcome to my shopping app</p>
 
       {products.map((product) => (
-        <div key={product.id}>
+        <div
+  key={product.id}
+  style={{
+    border: "1px solid #ddd",
+    borderRadius: "10px",
+    padding: "15px",
+    marginBottom: "15px"
+  }}
+>
           <h3>{product.name}</h3>
           <p>{product.price}</p>
           <button>Add to Cart</button>
