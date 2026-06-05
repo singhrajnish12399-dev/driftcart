@@ -45,7 +45,17 @@ function App() {
 >
           <h3>{product.name}</h3>
           <p>{product.price}</p>
-          <button>Add to Cart</button>
+          <button
+  style={{
+    background: "#2874f0",
+    color: "white",
+    border: "none",
+    padding: "10px 15px",
+    borderRadius: "5px"
+  }}
+>
+  Add to Cart
+</button>
           <hr />
         </div>
       ))}
