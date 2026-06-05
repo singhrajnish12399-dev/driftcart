@@ -1,6 +1,7 @@
 import React from "react";
 function App() {
 const [cartCount, setCartCount] = React.useState(0);
+const [search, setSearch] = React.useState("");
   const products = [
     { id: 1, name: "T-Shirt", price: "₹499" },
     { id: 2, name: "Shoes", price: "₹1499" },
