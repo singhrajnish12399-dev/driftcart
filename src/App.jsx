@@ -20,6 +20,17 @@ function App() {
   <h1>DriftCart</h1>
   <p>Your Shopping Destination</p>
 </div>
+<input
+  type="text"
+  placeholder="🔍 Search products..."
+  style={{
+    width: "100%",
+    padding: "12px",
+    marginBottom: "20px",
+    borderRadius: "8px",
+    border: "1px solid #ccc"
+  }}
+/>
       <p>Welcome to my shopping app</p>
 
       {products.map((product) => (
