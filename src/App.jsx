@@ -48,6 +48,7 @@ const [cartCount, setCartCount] = React.useState(0);
           <h3>{product.name}</h3>
           <p>{product.price}</p>
           <button
+  onClick={() => setCartCount(cartCount + 1)}
   style={{
     background: "#2874f0",
     color: "white",
