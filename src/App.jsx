@@ -53,6 +53,17 @@ onChange={(e) => setSearch(e.target.value)}
     marginBottom: "15px"
   }}
 >
+<img
+  src={product.image}
+  alt={product.name}
+  style={{
+    width: "100%",
+    height: "180px",
+    objectFit: "cover",
+    borderRadius: "10px",
+    marginBottom: "10px"
+  }}
+/>
           <h3>{product.name}</h3>
           <p>{product.price}</p>
           <button
