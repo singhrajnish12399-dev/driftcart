@@ -24,6 +24,11 @@ const [search, setSearch] = React.useState("");
   <h1>DriftCart</h1>
   <p>Your Shopping Destination</p>
 <p>🛒 Cart: {cartCount}</p>
+{cartItems.map((item, index) => (
+  <p key={index}>
+    🛒 {item.name} - {item.price}
+  </p>
+))}
 </div>
 <input
   type="text"
