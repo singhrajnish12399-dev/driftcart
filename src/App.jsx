@@ -1,4 +1,5 @@
 import React from "react";
+
 function App() {
   const [cart, setCart] = React.useState([]);
   const [search, setSearch] = React.useState("");
@@ -7,16 +8,16 @@ function App() {
   const [cat, setCat] = React.useState("All");
   const [tab, setTab] = React.useState("Home");
 
-  // Local static data array jo 100% stable chalega
+  // 1. Array me image properties add kar di gayi hain real image URLs ke sath
   const products = [
-    { id: 1, category: "Fashion", name: "Zara Slim Shirt", price: 1999, rating: "4.3", color: "#457b9d", text: "👕 SHIRT" },
-    { id: 2, category: "Fashion", name: "Levi's Jacket", price: 3499, rating: "4.5", color: "#1d3557", text: "🧥 JACKET" },
-    { id: 6, category: "Electronics", name: "iPhone 15 Pro", price: 139900, rating: "4.9", color: "#a8dadc", text: "📱 iPHONE" },
-    { id: 7, category: "Electronics", name: "MacBook Air M3", price: 114900, rating: "4.8", color: "#4a4a4a", text: "💻 MACBOOK" },
-    { id: 11, category: "Watches", name: "Casio Vintage", price: 1695, rating: "4.3", color: "#ee9b00", text: "⌚ CASIO" },
-    { id: 12, category: "Watches", name: "Fossil Chrono", price: 9495, rating: "4.4", color: "#ca6702", text: "⏱️ FOSSIL" },
-    { id: 16, category: "Shoes", name: "PUMA x one8 Kohli", price: 3999, rating: "4.8", color: "#e63946", text: "👟 PUMA one8" },
-    { id: 17, category: "Shoes", name: "Nike Air Max", price: 7995, rating: "4.6", color: "#000000", text: "👟 NIKE AIR" }
+    { id: 1, category: "Fashion", name: "Zara Slim Shirt", price: 1999, rating: "4.3", image: "https://picsum.photos" },
+    { id: 2, category: "Fashion", name: "Levi's Jacket", price: 3499, rating: "4.5", image: "https://picsum.photos" },
+    { id: 6, category: "Electronics", name: "iPhone 15 Pro", price: 139900, rating: "4.9", image: "https://picsum.photos" },
+    { id: 7, category: "Electronics", name: "MacBook Air M3", price: 114900, rating: "4.8", image: "https://picsum.photos" },
+    { id: 11, category: "Watches", name: "Casio Vintage", price: 1695, rating: "4.3", image: "https://picsum.photos" },
+    { id: 12, category: "Watches", name: "Fossil Chrono", price: 9495, rating: "4.4", image: "https://picsum.photos" },
+    { id: 16, category: "Shoes", name: "PUMA x one8 Kohli", price: 3999, rating: "4.8", image: "https://picsum.photos" },
+    { id: 17, category: "Shoes", name: "Nike Air Max", price: 7995, rating: "4.6", image: "https://picsum.photos" }
   ];
 
   if (!isLoggedIn) {
@@ -64,9 +65,14 @@ function App() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px", padding: "6px" }}>
             {filtered.map(p => (
               <div key={p.id} style={{ border: "1px solid #e0e0e0", borderRadius: "6px", padding: "8px", background: "white", position: "relative", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                <div style={{ width: "100%", height: "110px", background: p.color, borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: "bold", fontSize: "14px" }}>
-                  {p.text}
-                </div>
+                
+                {/* 2. Yahan par text placeholder div ko <img> tag se replace kiya gaya hai */}
+                <img 
+                  src={p.image} 
+                  alt={p.name} 
+                  style={{ width: "100%", height: "110px", objectFit: "cover", borderRadius: "4px" }} 
+                />
+
                 <span style={{ position: "absolute", top: "12px", right: "12px", background: "green", color: "white", padding: "1px 4px", borderRadius: "3px", fontSize: "10px" }}>★ {p.rating}</span>
                 <div style={{ marginTop: "4px" }}>
                   <h4 style={{ margin: "0 0 2px 0", fontSize: "12px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.name}</h4>
@@ -79,6 +85,7 @@ function App() {
         </div>
       )}
 
+      {/* Cart aur Account UI sections upar wale code ki tarah same rahenge */}
       {tab === "Cart" && (
         <div style={{ padding: "10px" }}>
           <div style={{ background: "white", padding: "12px", borderRadius: "6px" }}>
@@ -87,7 +94,8 @@ function App() {
               <div>
                 {cart.map((item, idx) => (
                   <div key={idx} style={{ display: "flex", gap: "10px", padding: "8px 0", borderBottom: "1px solid #f0f0f0", alignItems: "center" }}>
-                    <div style={{ width: "40px", height: "40px", background: item.color, borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "10px", fontWeight: "bold" }}>📦</div>
+                    {/* Cart me bhi item image use kar sakte hain */}
+                    <img src={item.image} alt={item.name} style={{ width: "40px", height: "40px", objectFit: "cover", borderRadius: "4px" }} />
                     <div><h5 style={{ margin: 0 }}>{item.name}</h5><p style={{ margin: 0, fontSize: "13px", fontWeight: "bold", color: "#2874f0" }}>₹{item.price}</p></div>
                   </div>
                 ))}
