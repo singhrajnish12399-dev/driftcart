@@ -30,6 +30,7 @@ const [wishlistCount, setWishlistCount] = React.useState(0);
 </p>
   <p>Your Shopping Destination</p>
 <p>🛒 Cart: {cartCount}</p>
+<p>❤️ Wishlist: {wishlistCount}</p>
 {cartItems.map((item, index) => (
   <p key={index}>
     🛒 {item.name} - {item.price}
