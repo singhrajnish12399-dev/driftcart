@@ -46,6 +46,9 @@ onChange={(e) => setSearch(e.target.value)}
     border: "1px solid #ccc"
   }}
 />
+<div>
+  <button>Fashion</button>
+</div>
       <p>Welcome to my shopping app</p>
 
       {products
