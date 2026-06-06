@@ -106,6 +106,24 @@ onChange={(e) => setSearch(e.target.value)}
         </div>
       ))}
     </div>
+<div
+  style={{
+    position: "fixed",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    background: "white",
+    borderTop: "1px solid #ddd",
+    display: "flex",
+    justifyContent: "space-around",
+    padding: "12px"
+  }}
+>
+  <span>🏠 Home</span>
+  <span>❤️ Wishlist</span>
+  <span>🛒 Cart</span>
+  <span>👤 Account</span>
+</div>
   );
 }
 
