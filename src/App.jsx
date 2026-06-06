@@ -64,6 +64,18 @@ onChange={(e) => setSearch(e.target.value)}
   <button>Shoes</button>
 </div>
       <p>Welcome to my shopping app</p>
+<div
+  style={{
+    background: "#ffeb3b",
+    padding: "15px",
+    borderRadius: "10px",
+    textAlign: "center",
+    marginBottom: "20px",
+    fontWeight: "bold"
+  }}
+>
+  🔥 Mega Sale - Up to 70% Off 🔥
+</div>
 <input
   type="text"
   placeholder="Enter your name"
