@@ -142,6 +142,7 @@ onChange={(e) => setSearch(e.target.value)}
 />
           <h3>{product.name}</h3>
           <p>{product.price}</p>
+<p>⭐⭐⭐⭐☆ 4.2 Rating</p>
           <button
   onClick={() => {
   setCartCount(cartCount + 1);
