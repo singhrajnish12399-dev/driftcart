@@ -9,21 +9,21 @@ function App() {
 
   // Sabhi browsers aur phone me 100% load hone wale stable real design image links
   const products = [
-  { id: 1, category: "Fashion", name: "Zara Slim Shirt", price: 1999, rating: "4.3", image: "https://picsum.photos/200/200?random=1" },
+  { id: 1, category: "Fashion", name: "Zara Slim Shirt", price: 1999, rating: "4.3", image: "https://images.unsplash.com/photo-1520975916090-3105956dac38?w=400" },
 
-  { id: 2, category: "Fashion", name: "Levi's Jacket", price: 3499, rating: "4.5", image: "https://picsum.photos/200/200?random=2" },
+  { id: 2, category: "Fashion", name: "Levi's Jacket", price: 3499, rating: "4.5", image: "https://images.unsplash.com/photo-1520975682031-a2c6d1b7f7b1?w=400" },
 
-  { id: 6, category: "Electronics", name: "iPhone 15 Pro", price: 139900, rating: "4.9", image: "https://picsum.photos/200/200?random=3" },
+  { id: 6, category: "Electronics", name: "iPhone 15 Pro", price: 139900, rating: "4.9", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400" },
 
-  { id: 7, category: "Electronics", name: "MacBook Air M3", price: 114900, rating: "4.8", image: "https://picsum.photos/200/200?random=4" },
+  { id: 7, category: "Electronics", name: "MacBook Air M3", price: 114900, rating: "4.8", image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400" },
 
-  { id: 11, category: "Watches", name: "Casio Vintage", price: 1695, rating: "4.3", image: "https://picsum.photos/200/200?random=5" },
+  { id: 11, category: "Watches", name: "Casio Vintage", price: 1695, rating: "4.3", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" },
 
-  { id: 12, category: "Watches", name: "Fossil Chrono", price: 9495, rating: "4.4", image: "https://picsum.photos/200/200?random=6" },
+  { id: 12, category: "Watches", name: "Fossil Chrono", price: 9495, rating: "4.4", image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400" },
 
-  { id: 16, category: "Shoes", name: "PUMA x one8 Kohli", price: 3999, rating: "4.8", image: "https://picsum.photos/200/200?random=7" },
+  { id: 16, category: "Shoes", name: "PUMA x one8 Kohli", price: 3999, rating: "4.8", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" },
 
-  { id: 17, category: "Shoes", name: "Nike Air Max", price: 7995, rating: "4.6", image: "https://picsum.photos/200/200?random=8" }
+  { id: 17, category: "Shoes", name: "Nike Air Max", price: 7995, rating: "4.6", image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=400" }
 ];
 
   if (!isLoggedIn) {
