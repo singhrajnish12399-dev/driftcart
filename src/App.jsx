@@ -7,16 +7,16 @@ function App() {
   const [cat, setCat] = React.useState("All");
   const [tab, setTab] = React.useState("Home");
 
-  // Sabhi products ke liye un-blocked aur 100% working real product image links
+  // Har product ke liye universal SVG icons aur stylish placeholders set kiye hain jo 100% chalenge
   const products = [
-    { id: 1, category: "Fashion", name: "Zara Slim Shirt", price: 1999, rating: "4.3", image: "https://wikimedia.org" },
-    { id: 2, category: "Fashion", name: "Levi's Jacket", price: 3499, rating: "4.5", image: "https://wikimedia.org" },
-    { id: 6, category: "Electronics", name: "iPhone 15 Pro", price: 139900, rating: "4.9", image: "https://wikimedia.org" },
-    { id: 7, category: "Electronics", name: "MacBook Air M3", price: 114900, rating: "4.8", image: "https://wikimedia.org" },
-    { id: 11, category: "Watches", name: "Casio Vintage", price: 1695, rating: "4.3", image: "https://wikimedia.org" },
-    { id: 12, category: "Watches", name: "Fossil Chrono", price: 9495, rating: "4.4", image: "https://wikimedia.org" },
-    { id: 16, category: "Shoes", name: "PUMA x one8 Kohli", price: 3999, rating: "4.8", image: "https://wikimedia.org" },
-    { id: 17, category: "Shoes", name: "Nike Air Max", price: 7995, rating: "4.6", image: "https://wikimedia.org" }
+    { id: 1, category: "Fashion", name: "Zara Slim Shirt", price: 1999, rating: "4.3", bg: "#eef2f3", icon: "👕", text: "Mens Shirt" },
+    { id: 2, category: "Fashion", name: "Levi's Jacket", price: 3499, rating: "4.5", bg: "#eef2f3", icon: "🧥", text: "Denim Jacket" },
+    { id: 6, category: "Electronics", name: "iPhone 15 Pro", price: 139900, rating: "4.9", bg: "#f4f4f4", icon: "📱", text: "iOS Device" },
+    { id: 7, category: "Electronics", name: "MacBook Air M3", price: 114900, rating: "4.8", bg: "#f4f4f4", icon: "💻", text: "Laptop M3" },
+    { id: 11, category: "Watches", name: "Casio Vintage", price: 1695, rating: "4.3", bg: "#fdf0d5", icon: "⌚", text: "Digital Watch" },
+    { id: 12, category: "Watches", name: "Fossil Chrono", price: 9495, rating: "4.4", bg: "#fdf0d5", icon: "⏱️", text: "Premium Watch" },
+    { id: 16, category: "Shoes", name: "PUMA x one8 Kohli", price: 3999, rating: "4.8", bg: "#f0efeb", icon: "👟", text: "one8 Edition" },
+    { id: 17, category: "Shoes", name: "Nike Air Max", price: 7995, rating: "4.6", bg: "#f0efeb", icon: "🏃", text: "Air Max Sports" }
   ];
 
   if (!isLoggedIn) {
@@ -68,7 +68,11 @@ function App() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px", padding: "6px" }}>
             {filtered.map(p => (
               <div key={p.id} style={{ border: "1px solid #e0e0e0", borderRadius: "6px", padding: "8px", background: "white", position: "relative", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                <img src={p.image} alt={p.name} style={{ width: "100%", height: "110px", objectFit: "contain", borderRadius: "4px", background: "#f9f9f9" }} />
+                {/* 🎨 Custom Internal Graphic Container - Yeh 100% load hoga bina error ke */}
+                <div style={{ width: "100%", height: "110px", background: p.bg, borderRadius: "4px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "5px" }}>
+                  <span style={{ fontSize: "40px" }}>{p.icon}</span>
+                  <span style={{ fontSize: "10px", color: "#666", fontWeight: "bold", textTransform: "uppercase" }}>{p.text}</span>
+                </div>
                 <span style={{ position: "absolute", top: "12px", right: "12px", background: "green", color: "white", padding: "1px 4px", borderRadius: "3px", fontSize: "10px" }}>★ {p.rating}</span>
                 <div style={{ marginTop: "4px" }}>
                   <h4 style={{ margin: "0 0 2px 0", fontSize: "12px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.name}</h4>
@@ -90,7 +94,7 @@ function App() {
               <div>
                 {cart.map((item, idx) => (
                   <div key={idx} style={{ display: "flex", gap: "10px", padding: "8px 0", borderBottom: "1px solid #f0f0f0", alignItems: "center" }}>
-                    <img src={item.image} style={{ width: "40px", height: "40px", objectFit: "contain", borderRadius: "4px" }} />
+                    <div style={{ width: "40px", height: "40px", background: item.bg, borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px" }}>{item.icon}</div>
                     <div><h5 style={{ margin: 0 }}>{item.name}</h5><p style={{ margin: 0, fontSize: "13px", fontWeight: "bold", color: "#2874f0" }}>₹{item.price}</p></div>
                   </div>
                 ))}
@@ -119,3 +123,11 @@ function App() {
         {[{ id: "Home", n: "Home", i: "🏠" }, { id: "Cart", n: "Cart", i: `🛒${cart.length ? `(${cart.length})` : ""}` }, { id: "Account", n: "Account", i: "👤" }].map(t => (
           <div key={t.id} onClick={() => setTab(t.id)} style={{ textAlign: "center", cursor: "pointer", flex: 1 }}>
             <div style={{ fontSize: "16px" }}>{t.i}</div>
+            <span style={{ fontSize: "10px", color: tab === t.id ? "#2874f0" : "#666", fontWeight: tab === t.id ? "bold" : "normal" }}>{t.n}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+export default App;
