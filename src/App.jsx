@@ -9,15 +9,22 @@ function App() {
 
   // Sabhi browsers aur phone me 100% load hone wale stable real design image links
   const products = [
-    { id: 1, category: "Fashion", name: "Zara Slim Shirt", price: 1999, rating: "4.3", image: "https://picsum.photos" },
-    { id: 2, category: "Fashion", name: "Levi's Jacket", price: 3499, rating: "4.5", image: "https://picsum.photos" },
-    { id: 6, category: "Electronics", name: "iPhone 15 Pro", price: 139900, rating: "4.9", image: "https://picsum.photos" },
-    { id: 7, category: "Electronics", name: "MacBook Air M3", price: 114900, rating: "4.8", image: "https://picsum.photos" },
-    { id: 11, category: "Watches", name: "Casio Vintage", price: 1695, rating: "4.3", image: "https://picsum.photos" },
-    { id: 12, category: "Watches", name: "Fossil Chrono", price: 9495, rating: "4.4", image: "https://picsum.photos" },
-    { id: 16, category: "Shoes", name: "PUMA x one8 Kohli", price: 3999, rating: "4.8", image: "https://picsum.photos" },
-    { id: 17, category: "Shoes", name: "Nike Air Max", price: 7995, rating: "4.6", image: "https://picsum.photos" }
-  ];
+  { id: 1, category: "Fashion", name: "Zara Slim Shirt", price: 1999, rating: "4.3", image: "https://picsum.photos/200/200?random=1" },
+
+  { id: 2, category: "Fashion", name: "Levi's Jacket", price: 3499, rating: "4.5", image: "https://picsum.photos/200/200?random=2" },
+
+  { id: 6, category: "Electronics", name: "iPhone 15 Pro", price: 139900, rating: "4.9", image: "https://picsum.photos/200/200?random=3" },
+
+  { id: 7, category: "Electronics", name: "MacBook Air M3", price: 114900, rating: "4.8", image: "https://picsum.photos/200/200?random=4" },
+
+  { id: 11, category: "Watches", name: "Casio Vintage", price: 1695, rating: "4.3", image: "https://picsum.photos/200/200?random=5" },
+
+  { id: 12, category: "Watches", name: "Fossil Chrono", price: 9495, rating: "4.4", image: "https://picsum.photos/200/200?random=6" },
+
+  { id: 16, category: "Shoes", name: "PUMA x one8 Kohli", price: 3999, rating: "4.8", image: "https://picsum.photos/200/200?random=7" },
+
+  { id: 17, category: "Shoes", name: "Nike Air Max", price: 7995, rating: "4.6", image: "https://picsum.photos/200/200?random=8" }
+];
 
   if (!isLoggedIn) {
     return (
