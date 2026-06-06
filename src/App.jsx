@@ -46,8 +46,17 @@ onChange={(e) => setSearch(e.target.value)}
     border: "1px solid #ccc"
   }}
 />
-<div>
+<div
+  style={{
+    display: "flex",
+    gap: "10px",
+    marginBottom: "20px"
+  }}
+>
   <button>Fashion</button>
+  <button>Electronics</button>
+  <button>Watches</button>
+  <button>Shoes</button>
 </div>
       <p>Welcome to my shopping app</p>
 
