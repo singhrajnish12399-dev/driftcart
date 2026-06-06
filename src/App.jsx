@@ -1,130 +1,162 @@
 import React from "react";
 
 function App() {
-  const [cart, setCart] = React.useState([]);
   const [search, setSearch] = React.useState("");
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [username, setUsername] = React.useState("");
-  const [cat, setCat] = React.useState("All");
-  const [tab, setTab] = React.useState("Home");
 
-  // 1. Stable direct image URLs
-  const products = [
-    { id: 1, category: "Fashion", name: "Zara Slim Shirt", price: 1999, rating: "4.3", image: "https://unsplash.com" },
-    { id: 2, category: "Fashion", name: "Levi's Jacket", price: 3499, rating: "4.5", image: "https://unsplash.com" },
-    { id: 6, category: "Electronics", name: "iPhone 15 Pro", price: 139900, rating: "4.9", image: "https://unsplash.com" },
-    { id: 7, category: "Electronics", name: "MacBook Air M3", price: 114900, rating: "4.8", image: "https://unsplash.com" },
-    { id: 11, category: "Watches", name: "Casio Vintage", price: 1695, rating: "4.3", image: "https://unsplash.com" },
-    { id: 12, category: "Watches", name: "Fossil Chrono", price: 9495, rating: "4.4", image: "https://unsplash.com" },
-    { id: 16, category: "Shoes", name: "PUMA x one8 Kohli", price: 3999, rating: "4.8", image: "https://unsplash.com" },
-    { id: 17, category: "Shoes", name: "Nike Air Max", price: 7995, rating: "4.6", image: "https://unsplash.com" }
+  // Category Categories icons ke sath
+  const categories = [
+    { id: "foryou", n: "For You", i: "🎁" },
+    { id: "fashion", n: "Fashion", i: "👕" },
+    { id: "mobiles", n: "Mobiles", i: "📱" },
+    { id: "beauty", n: "Beauty", i: "💄" },
+    { id: "electronics", n: "Electronics", i: "💻" },
+    { id: "home", n: "Home", i: "🏠" },
   ];
 
-  if (!isLoggedIn) {
-    return (
-      <div style={{ padding: "20px", fontFamily: "sans-serif", maxWidth: "400px", margin: "50px auto", textAlign: "center" }}>
-        <div style={{ background: "#2874f0", color: "white", padding: "25px", borderRadius: "12px", marginBottom: "20px" }}>
-          <h2>🛒 DriftCart</h2><p style={{ margin: 0, opacity: 0.9 }}>Shop Smart, Shop Fast</p>
-        </div>
-        <form onSubmit={(e) => { e.preventDefault(); if(username.trim()) setIsLoggedIn(true); }} style={{ border: "1px solid #ddd", padding: "20px", borderRadius: "8px" }}>
-          <h3 style={{ marginTop: 0 }}>Login / Sign Up</h3>
-          <input type="text" placeholder="Enter your name" value={username} onChange={(e) => setUsername(e.target.value)} style={{ width: "100%", padding: "10px", marginBottom: "15px", borderRadius: "5px", border: "1px solid #ccc", boxSizing: "border-box" }} />
-          <button type="submit" style={{ width: "100%", background: "#2874f0", color: "white", border: "none", padding: "10px", borderRadius: "5px", fontWeight: "bold" }}>Get Started 🚀</button>
-        </form>
-      </div>
-    );
-  }
-
-  const filtered = products.filter(p => p.name.toLowerCase().includes(search.toLowerCase()) && (cat === "All" || p.category === cat));
-  const totalBill = cart.reduce((s, item) => s + item.price, 0);
+  // Grid/Scroll items ke liye dummy products
+  const gridProducts = [
+    { id: 1, name: "Laptops", i: "💻", bg: "#e3f2fd" },
+    { id: 2, name: "Men's Slippers", i: "👟", bg: "#f1f8e9" },
+    { id: 3, name: "Moisturizer", i: "🧴", bg: "#fff3e0" },
+    { id: 4, name: "Sunglasses", i: "🕶️", bg: "#f3e5f5" },
+  ];
 
   return (
-    <div style={{ fontFamily: "sans-serif", maxWidth: "450px", margin: "0 auto", background: "#f1f3f6", minHeight: "100vh", paddingBottom: "60px" }}>
-      <div style={{ background: "#2874f0", color: "white", padding: "10px 15px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "5px" }}>
-          <h3 style={{ margin: 0, fontStyle: "italic" }}>DriftCart</h3><span>Hi, {username} 👋</span>
-        </div>
-        <div style={{ fontSize: "11px", background: "rgba(255,255,255,0.15)", padding: "4px 8px", borderRadius: "4px" }}>📍 Deliver to: <b>Bhojpur, Bihar...</b></div>
+    <div style={{ fontFamily: "sans-serif", maxWidth: "450px", margin: "0 auto", background: "#f1f3f6", minHeight: "100vh", paddingBottom: "70px", boxSizing: "border-box" }}>
+      
+      {/* 1. Top Header Tab Toggle (Flipkart / Travel) */}
+      <div style={{ display: "flex", background: "white", padding: "8px 12px", gap: "10px" }}>
+        <button style={{ flex: 1, background: "#2874f0", color: "white", border: "none", padding: "10px", borderRadius: "8px", fontWeight: "bold", display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", fontSize: "14px" }}>
+          🛒 Flipkart
+        </button>
+        <button style={{ flex: 1, background: "#f0f2f5", color: "#333", border: "1px solid #ddd", padding: "10px", borderRadius: "8px", fontWeight: "bold", display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", fontSize: "14px" }}>
+          ✈️ Travel
+        </button>
       </div>
 
-      <div style={{ padding: "8px 15px", background: "#2874f0" }}>
-        <input type="text" placeholder="🔍 Search products, brands and more" value={search} onChange={(e) => setSearch(e.target.value)} style={{ width: "100%", padding: "8px 10px", borderRadius: "4px", border: "none", boxSizing: "border-box" }} />
+      {/* 2. Delivery Location Bar */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: "#f0f5ff", padding: "8px 12px", borderBottom: "1px solid #e0e0e0" }}>
+        <div style={{ fontSize: "12px", color: "#333", display: "flex", alignItems: "center", gap: "4px" }}>
+          📍 <span style={{ fontWeight: "600" }}>Kaup Kali Mandi, Rajput toli, Bhojpur...</span> ⬇️
+        </div>
+        <div style={{ fontSize: "12px", background: "amber", color: "#ff9f00", fontWeight: "bold", display: "flex", alignItems: "center" }}>
+          ⚡ 0
+        </div>
       </div>
 
-      {tab === "Home" && (
-        <div>
-          <div style={{ display: "flex", gap: "12px", background: "white", padding: "12px 10px", overflowX: "auto", borderBottom: "1px solid #ddd" }}>
-            {[{ id: "All", n: "For You", i: "🎁" }, { id: "Fashion", n: "Fashion", i: "👕" }, { id: "Electronics", n: "Mobiles", i: "📱" }, { id: "Watches", n: "Watches", i: "⌚" }, { id: "Shoes", n: "Shoes", i: "👟" }].map(c => (
-              <div key={c.id} onClick={() => setCat(c.id)} style={{ textAlign: "center", minWidth: "60px", cursor: "pointer" }}>
-                <div style={{ fontSize: "20px", background: cat === c.id ? "#e0ecff" : "#f6f6f6", width: "40px", height: "40px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 4px auto", border: cat === c.id ? "1.5px solid #2874f0" : "none" }}>{c.i}</div>
-                <span style={{ fontSize: "11px", color: cat === c.id ? "#2874f0" : "#333" }}>{c.n}</span>
-              </div>
-            ))}
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px", padding: "6px" }}>
-            {filtered.map(p => (
-              <div key={p.id} style={{ border: "1px solid #e0e0e0", borderRadius: "6px", padding: "8px", background: "white", position: "relative", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                
-                {/* 🎯 KEY FIX: Yeh pure line ko dhyan se check kijiye */}
-                <img 
-                  src={p.image} 
-                  alt={p.name} 
-                  style={{ width: "100%", height: "110px", objectFit: "cover", borderRadius: "4px", display: "block" }} 
-                />
-
-                <span style={{ position: "absolute", top: "12px", right: "12px", background: "green", color: "white", padding: "1px 4px", borderRadius: "3px", fontSize: "10px" }}>★ {p.rating}</span>
-                <div style={{ marginTop: "4px" }}>
-                  <h4 style={{ margin: "0 0 2px 0", fontSize: "12px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.name}</h4>
-                  <p style={{ fontSize: "14px", fontWeight: "bold", margin: "0 0 6px 0" }}>₹{p.price.toLocaleString("en-IN")}</p>
-                </div>
-                <button onClick={() => setCart([...cart, p])} style={{ width: "100%", background: "#ff9f00", color: "white", border: "none", padding: "5px", borderRadius: "4px", fontSize: "11px", fontWeight: "bold" }}>+ Add to Cart</button>
-              </div>
-            ))}
-          </div>
+      {/* 3. Search Bar Section (With Camera and Lens icon placeholders) */}
+      <div style={{ padding: "10px 12px", background: "white" }}>
+        <div style={{ display: "flex", alignItems: "center", background: "#f0f2f5", borderRadius: "8px", padding: "2px 10px", border: "1px solid #ccc" }}>
+          <span style={{ fontSize: "16px", color: "#888" }}>🔍</span>
+          <input 
+            type="text" 
+            placeholder="Search tv, mobiles, brands..." 
+            value={search} 
+            onChange={(e) => setSearch(e.target.value)} 
+            style={{ width: "100%", padding: "10px 8px", background: "transparent", border: "none", outline: "none", fontSize: "14px" }} 
+          />
+          <span style={{ fontSize: "18px", marginRight: "10px", cursor: "pointer" }}>📷</span>
+          <span style={{ fontSize: "18px", cursor: "pointer" }}>🔲</span>
         </div>
-      )}
+      </div>
 
-      {tab === "Cart" && (
-        <div style={{ padding: "10px" }}>
-          <div style={{ background: "white", padding: "12px", borderRadius: "6px" }}>
-            <h4 style={{ margin: "0 0 10px 0" }}>My Cart ({cart.length} Items)</h4>
-            {cart.length === 0 ? <p style={{ textAlign: "center", color: "#666", fontSize: "14px" }}>Aapka cart khali hai! 🛒</p> : 
-              <div>
-                {cart.map((item, idx) => (
-                  <div key={idx} style={{ display: "flex", gap: "10px", padding: "8px 0", borderBottom: "1px solid #f0f0f0", alignItems: "center" }}>
-                    <img src={item.image} alt={item.name} style={{ width: "40px", height: "40px", objectFit: "cover", borderRadius: "4px" }} />
-                    <div><h5 style={{ margin: 0 }}>{item.name}</h5><p style={{ margin: 0, fontSize: "13px", fontWeight: "bold", color: "#2874f0" }}>₹{item.price}</p></div>
-                  </div>
-                ))}
-                <div style={{ marginTop: "12px", background: "#f9f9f9", padding: "8px", borderRadius: "4px", fontSize: "13px" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", fontWeight: "bold", color: "green" }}><span>Total Amount:</span><span>₹{totalBill.toLocaleString("en-IN")}</span></div>
-                </div>
-                <button style={{ width: "100%", background: "#fb641b", color: "white", border: "none", padding: "10px", borderRadius: "4px", fontWeight: "bold", marginTop: "10px" }}>Proceed to Checkout 🚀</button>
-              </div>
-            }
-          </div>
-        </div>
-      )}
-
-      {tab === "Account" && (
-        <div style={{ padding: "10px" }}>
-          <div style={{ background: "white", padding: "15px", borderRadius: "6px", textAlign: "center" }}>
-            <div style={{ fontSize: "40px" }}>👤</div><h3>{username}</h3>
-            <button onClick={() => { setIsLoggedIn(false); setUsername(""); setTab("Home"); }} style={{ width: "100%", background: "#ff4d4d", color: "white", border: "none", padding: "8px", borderRadius: "4px", fontWeight: "bold" }}>Logout Account</button>
-          </div>
-        </div>
-      )}
-
-      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: "white", borderTop: "1px solid #ddd", display: "flex", justifyContent: "space-around", padding: "6px 0", zIndex: 200 }}>
-        {[{ id: "Home", n: "Home", i: "🏠" }, { id: "Cart", n: "Cart", i: `🛒${cart.length ? `(${cart.length})` : ""}` }, { id: "Account", n: "Account", i: "👤" }].map(t => (
-          <div key={t.id} onClick={() => setTab(t.id)} style={{ textAlign: "center", cursor: "pointer", flex: 1 }}>
-            <div style={{ fontSize: "16px" }}>{t.i}</div>
-            <span style={{ fontSize: "10px", color: tab === t.id ? "#2874f0" : "#666", fontWeight: tab === t.id ? "bold" : "normal" }}>{t.n}</span>
+      {/* 4. Horizontal Categories Scroll Menu */}
+      <div style={{ display: "flex", gap: "15px", background: "white", padding: "12px 10px", overflowX: "auto", borderBottom: "1px solid #ddd" }}>
+        {categories.map(c => (
+          <div key={c.id} style={{ textAlign: "center", minWidth: "65px", cursor: "pointer" }}>
+            <div style={{ fontSize: "22px", background: "#f9f9f9", width: "45px", height: "45px", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 4px auto", border: "1px solid #eee" }}>
+              {c.i}
+            </div>
+            <span style={{ fontSize: "11px", color: "#333", fontWeight: "500" }}>{c.n}</span>
           </div>
         ))}
       </div>
+
+      {/* 5. Exclusive Coupon Banner Section */}
+      <div style={{ padding: "10px 12px" }}>
+        <div style={{ background: "#e3f2fd", border: "1px dashed #2874f0", borderRadius: "8px", padding: "10px 15px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div>
+            <div style={{ fontSize: "11px", color: "#2874f0", fontWeight: "bold" }}>Exclusive coupon for you!</div>
+            <div style={{ fontSize: "16px", fontWeight: "900", color: "#1a237e" }}>FLAT 10% OFF</div>
+            <div style={{ fontSize: "10px", color: "#555" }}>Up to ₹100 • Already applied</div>
+          </div>
+          <div style={{ fontSize: "30px" }}>🛍️</div>
+        </div>
+      </div>
+
+      {/* 6. Big Smartphone Launch Hero Banner Ads */}
+      <div style={{ padding: "0 12px 10px 12px" }}>
+        <div style={{ background: "linear-gradient(135deg, #0d47a1 0%, #002171 100%)", color: "white", borderRadius: "12px", padding: "20px", position: "relative", overflow: "hidden", minHeight: "130px" }}>
+          <div style={{ fontSize: "12px", opacity: 0.8, fontWeight: "bold" }}>Flipkart 🛒</div>
+          <h2 style={{ margin: "5px 0 2px 0", fontSize: "20px", fontWeight: "900" }}>realme P4R 5G</h2>
+          <p style={{ margin: "0 0 5px 0", fontSize: "13px", color: "#ffeb3b", fontWeight: "bold" }}>Launch 10th June, 12 PM</p>
+          <p style={{ margin: 0, fontSize: "11px", opacity: 0.9 }}>Biggest 8000mAh Battery*</p>
+          
+          {/* Absolute Background Graphics to match image feel */}
+          <div style={{ position: "absolute", right: "-10px", bottom: "-10px", fontSize: "85px", opacity: 0.15, fontWeight: "900" }}>
+            8000
+          </div>
+          <div style={{ position: "absolute", right: "20px", top: "25px", fontSize: "40px" }}>
+            📱
+          </div>
+          <span style={{ position: "absolute", right: "10px", bottom: "10px", background: "rgba(0,0,0,0.4)", padding: "2px 5px", borderRadius: "3px", fontSize: "8px" }}>AD</span>
+        </div>
+      </div>
+
+      {/* 7. Product Horizontal Scroll List (Like "Laptops", "Moisturizer") */}
+      <div style={{ background: "white", padding: "15px 12px", marginBottom: "10px" }}>
+        <div style={{ display: "flex", gap: "12px", overflowX: "auto" }}>
+          {gridProducts.map(p => (
+            <div key={p.id} style={{ minWidth: "90px", textAlign: "center" }}>
+              <div style={{ width: "90px", height: "90px", background: p.bg, borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "35px", marginBottom: "6px", border: "1px solid #f0f0f0" }}>
+                {p.i}
+              </div>
+              <div style={{ fontSize: "11px", color: "#333", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.name}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 8. Bottom Mini Banners Row */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px", padding: "0 12px" }}>
+        <div style={{ background: "#212121", color: "white", height: "60px", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", fontWeight: "bold", position: "relative" }}>
+          Adidas 👟 <span style={{ position: "absolute", right: "4px", bottom: "2px", fontSize: "7px", opacity: 0.6 }}>AD</span>
+        </div>
+        <div style={{ background: "#d7ccc8", color: "#5d4037", height: "60px", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", fontWeight: "bold", position: "relative" }}>
+          Minara 💍 <span style={{ position: "absolute", right: "4px", bottom: "2px", fontSize: "7px", opacity: 0.6 }}>AD</span>
+        </div>
+        <div style={{ background: "#e1bee7", color: "#4a148c", height: "60px", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", fontWeight: "bold", position: "relative" }}>
+          Ninja 🥤 <span style={{ position: "absolute", right: "4px", bottom: "2px", fontSize: "7px", opacity: 0.6 }}>AD</span>
+        </div>
+      </div>
+
+      {/* 9. Flipkart Sticky Professional Bottom Navigation Bar */}
+      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: "white", borderTop: "1px solid #e0e0e0", display: "flex", justifyContent: "space-around", padding: "8px 0", zIndex: 1000, maxWidth: "450px", margin: "0 auto" }}>
+        <div style={{ textAlign: "center", flex: 1, cursor: "pointer", color: "#2874f0" }}>
+          <div style={{ fontSize: "20px" }}>🏠</div>
+          <span style={{ fontSize: "10px", fontWeight: "bold" }}>Home</span>
+        </div>
+        <div style={{ textAlign: "center", flex: 1, cursor: "pointer", color: "#666" }}>
+          <div style={{ fontSize: "20px" }}>🎮</div>
+          <span style={{ fontSize: "10px" }}>Play</span>
+        </div>
+        <div style={{ textAlign: "center", flex: 1, cursor: "pointer", color: "#666" }}>
+          <div style={{ fontSize: "20px" }}>🔲</div>
+          <span style={{ fontSize: "10px" }}>Categories</span>
+        </div>
+        <div style={{ textAlign: "center", flex: 1, cursor: "pointer", color: "#666" }}>
+          <div style={{ fontSize: "20px" }}>👤</div>
+          <span style={{ fontSize: "10px" }}>Account</span>
+        </div>
+        <div style={{ textAlign: "center", flex: 1, cursor: "pointer", color: "#666", position: "relative" }}>
+          <div style={{ fontSize: "20px" }}>🛒</div>
+          <span style={{ fontSize: "10px" }}>Cart</span>
+          <span style={{ position: "absolute", top: "-4px", right: "12px", background: "#ff3d00", color: "white", borderRadius: "50%", padding: "1px 5px", fontSize: "9px", fontWeight: "bold" }}>7</span>
+        </div>
+      </div>
+
     </div>
   );
 }
+
 export default App;
