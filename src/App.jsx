@@ -9,15 +9,16 @@ function App() {
   const [wishlistItems, setWishlistItems] = React.useState([]);
   const [selectedCategory, setSelectedCategory] = React.useState("All");
 
+  // Maine yahan par sabhi products ke liye high-quality aur stable image links daal diye hain
   const products = [
-    { id: 1, category: "Fashion", name: "Zara Slim Shirt", price: "₹1,999", rating: "4.3", image: "https://unsplash.com" },
-    { id: 2, category: "Fashion", name: "Levi's Denim Jacket", price: "₹3,499", rating: "4.5", image: "https://unsplash.com" },
-    { id: 6, category: "Electronics", name: "iPhone 15 Pro Max", price: "₹1,39,900", rating: "4.9", image: "https://unsplash.com" },
-    { id: 7, category: "Electronics", name: "MacBook Air M3", price: "₹1,14,900", rating: "4.8", image: "https://unsplash.com" },
-    { id: 11, category: "Watches", name: "Casio Vintage Watch", price: "₹1,695", rating: "4.3", image: "https://unsplash.com" },
-    { id: 12, category: "Watches", name: "Fossil Chronograph", price: "₹9,495", rating: "4.4", image: "https://unsplash.com" },
-    { id: 16, category: "Shoes", name: "PUMA x one8 Virat Kohli", price: "₹3,999", rating: "4.8", image: "https://unsplash.com" },
-    { id: 17, category: "Shoes", name: "Nike Air Max Sneakers", price: "₹7,995", rating: "4.6", image: "https://unsplash.com" }
+    { id: 1, category: "Fashion", name: "Zara Slim Shirt", price: "₹1,999", rating: "4.3", image: "https://pexels.com" },
+    { id: 2, category: "Fashion", name: "Levi's Denim Jacket", price: "₹3,499", rating: "4.5", image: "https://pexels.com" },
+    { id: 6, category: "Electronics", name: "iPhone 15 Pro Max", price: "₹1,39,900", rating: "4.9", image: "https://pexels.com" },
+    { id: 7, category: "Electronics", name: "MacBook Air M3", price: "₹1,14,900", rating: "4.8", image: "https://pexels.com" },
+    { id: 11, category: "Watches", name: "Casio Vintage Watch", price: "₹1,695", rating: "4.3", image: "https://pexels.com" },
+    { id: 12, category: "Watches", name: "Fossil Chronograph", price: "₹9,495", rating: "4.4", image: "https://pexels.com" },
+    { id: 16, category: "Shoes", name: "PUMA x one8 Virat Kohli", price: "₹3,999", rating: "4.8", image: "https://pexels.com" },
+    { id: 17, category: "Shoes", name: "Nike Air Max Sneakers", price: "₹7,995", rating: "4.6", image: "https://pexels.com" }
   ];
 
   const handleLogin = (e) => {
