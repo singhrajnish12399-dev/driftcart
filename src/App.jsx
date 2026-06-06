@@ -169,7 +169,10 @@ onChange={(e) => setSearch(e.target.value)}
   Add to Cart
 </button>
 <button
-  onClick={() => setWishlistCount(wishlistCount + 1)}
+  onClick={() => {
+  setWishlistCount(wishlistCount + 1);
+  setWishlistItems([...wishlistItems, product]);
+}}
   style={{
     marginLeft: "10px",
     padding: "10px 15px",
