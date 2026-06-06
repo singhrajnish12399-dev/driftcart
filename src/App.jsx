@@ -7,16 +7,16 @@ function App() {
   const [cat, setCat] = React.useState("All");
   const [tab, setTab] = React.useState("Home");
 
-  // Maine sabhi products ke liye un-blocked aur high-speed Unsplash image links set kar diye hain
+  // Har product ke liye ek solid colorful background set kiya hai jo 100% load hoga
   const products = [
-    { id: 1, category: "Fashion", name: "Zara Slim Shirt", price: 1999, rating: "4.3", image: "https://unsplash.com" },
-    { id: 2, category: "Fashion", name: "Levi's Jacket", price: 3499, rating: "4.5", image: "https://unsplash.com" },
-    { id: 6, category: "Electronics", name: "iPhone 15 Pro", price: 139900, rating: "4.9", image: "https://unsplash.com" },
-    { id: 7, category: "Electronics", name: "MacBook Air M3", price: 114900, rating: "4.8", image: "https://unsplash.com" },
-    { id: 11, category: "Watches", name: "Casio Vintage", price: 1695, rating: "4.3", image: "https://unsplash.com" },
-    { id: 12, category: "Watches", name: "Fossil Chrono", price: 9495, rating: "4.4", image: "https://unsplash.com" },
-    { id: 16, category: "Shoes", name: "PUMA x one8 Kohli", price: 3999, rating: "4.8", image: "https://unsplash.com" },
-    { id: 17, category: "Shoes", name: "Nike Air Max", price: 7995, rating: "4.6", image: "https://unsplash.com" }
+    { id: 1, category: "Fashion", name: "Zara Slim Shirt", price: 1999, rating: "4.3", color: "#457b9d", text: "👕 SHIRT" },
+    { id: 2, category: "Fashion", name: "Levi's Jacket", price: 3499, rating: "4.5", color: "#1d3557", text: "🧥 JACKET" },
+    { id: 6, category: "Electronics", name: "iPhone 15 Pro", price: 139900, rating: "4.9", color: "#a8dadc", text: "📱 iPHONE" },
+    { id: 7, category: "Electronics", name: "MacBook Air M3", price: 114900, rating: "4.8", color: "#4a4a4a", text: "💻 MACBOOK" },
+    { id: 11, category: "Watches", name: "Casio Vintage", price: 1695, rating: "4.3", color: "#ee9b00", text: "⌚ CASIO" },
+    { id: 12, category: "Watches", name: "Fossil Chrono", price: 9495, rating: "4.4", color: "#ca6702", text: "⏱️ FOSSIL" },
+    { id: 16, category: "Shoes", name: "PUMA x one8 Kohli", price: 3999, rating: "4.8", color: "#e63946", text: "👟 PUMA one8" },
+    { id: 17, category: "Shoes", name: "Nike Air Max", price: 7995, rating: "4.6", color: "#000000", text: "👟 NIKE AIR" }
   ];
 
   if (!isLoggedIn) {
@@ -39,7 +39,6 @@ function App() {
 
   return (
     <div style={{ fontFamily: "sans-serif", maxWidth: "450px", margin: "0 auto", background: "#f1f3f6", minHeight: "100vh", paddingBottom: "60px" }}>
-      {/* Top Header */}
       <div style={{ background: "#2874f0", color: "white", padding: "10px 15px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "5px" }}>
           <h3 style={{ margin: 0, fontStyle: "italic" }}>DriftCart</h3><span>Hi, {username} 👋</span>
@@ -47,15 +46,12 @@ function App() {
         <div style={{ fontSize: "11px", background: "rgba(255,255,255,0.15)", padding: "4px 8px", borderRadius: "4px" }}>📍 Deliver to: <b>Bhojpur, Bihar...</b></div>
       </div>
 
-      {/* Search bar */}
       <div style={{ padding: "8px 15px", background: "#2874f0" }}>
         <input type="text" placeholder="🔍 Search products, brands and more" value={search} onChange={(e) => setSearch(e.target.value)} style={{ width: "100%", padding: "8px 10px", borderRadius: "4px", border: "none", boxSizing: "border-box" }} />
       </div>
 
-      {/* HOME TAB VIEW */}
       {tab === "Home" && (
         <div>
-          {/* Categories icons grid */}
           <div style={{ display: "flex", gap: "12px", background: "white", padding: "12px 10px", overflowX: "auto", borderBottom: "1px solid #ddd" }}>
             {[{ id: "All", n: "For You", i: "🎁" }, { id: "Fashion", n: "Fashion", i: "👕" }, { id: "Electronics", n: "Mobiles", i: "📱" }, { id: "Watches", n: "Watches", i: "⌚" }, { id: "Shoes", n: "Shoes", i: "👟" }].map(c => (
               <div key={c.id} onClick={() => setCat(c.id)} style={{ textAlign: "center", minWidth: "60px", cursor: "pointer" }}>
@@ -64,11 +60,14 @@ function App() {
               </div>
             ))}
           </div>
-          {/* Flipkart layout 2-Column Product Display */}
+
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px", padding: "6px" }}>
             {filtered.map(p => (
               <div key={p.id} style={{ border: "1px solid #e0e0e0", borderRadius: "6px", padding: "8px", background: "white", position: "relative", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                <img src={p.image} style={{ width: "100%", height: "110px", objectFit: "cover", borderRadius: "4px" }} />
+                {/* 🎨 Yeh direct background box hai jo link par depend nahi karta aur 100% chalega */}
+                <div style={{ width: "100%", height: "110px", background: p.color, borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: "bold", fontSize: "14px" }}>
+                  {p.text}
+                </div>
                 <span style={{ position: "absolute", top: "12px", right: "12px", background: "green", color: "white", padding: "1px 4px", borderRadius: "3px", fontSize: "10px" }}>★ {p.rating}</span>
                 <div style={{ marginTop: "4px" }}>
                   <h4 style={{ margin: "0 0 2px 0", fontSize: "12px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.name}</h4>
@@ -81,7 +80,6 @@ function App() {
         </div>
       )}
 
-      {/* CART TAB VIEW */}
       {tab === "Cart" && (
         <div style={{ padding: "10px" }}>
           <div style={{ background: "white", padding: "12px", borderRadius: "6px" }}>
@@ -89,8 +87,8 @@ function App() {
             {cart.length === 0 ? <p style={{ textAlign: "center", color: "#666", fontSize: "14px" }}>Aapka cart khali hai! 🛒</p> : 
               <div>
                 {cart.map((item, idx) => (
-                  <div key={idx} style={{ display: "flex", gap: "10px", padding: "8px 0", borderBottom: "1px solid #f0f0f0" }}>
-                    <img src={item.image} style={{ width: "40px", height: "40px", objectFit: "cover", borderRadius: "4px" }} />
+                  <div key={idx} style={{ display: "flex", gap: "10px", padding: "8px 0", borderBottom: "1px solid #f0f0f0", alignItems: "center" }}>
+                    <div style={{ width: "40px", height: "40px", background: item.color, borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "10px", fontWeight: "bold" }}>📦</div>
                     <div><h5 style={{ margin: 0 }}>{item.name}</h5><p style={{ margin: 0, fontSize: "13px", fontWeight: "bold", color: "#2874f0" }}>₹{item.price}</p></div>
                   </div>
                 ))}
@@ -104,7 +102,6 @@ function App() {
         </div>
       )}
 
-      {/* ACCOUNT TAB VIEW */}
       {tab === "Account" && (
         <div style={{ padding: "10px" }}>
           <div style={{ background: "white", padding: "15px", borderRadius: "6px", textAlign: "center" }}>
@@ -114,7 +111,6 @@ function App() {
         </div>
       )}
 
-      {/* Bottom Navigation */}
       <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: "white", borderTop: "1px solid #ddd", display: "flex", justifyContent: "space-around", padding: "6px 0", zIndex: 200 }}>
         {[{ id: "Home", n: "Home", i: "🏠" }, { id: "Cart", n: "Cart", i: `🛒${cart.length ? `(${cart.length})` : ""}` }, { id: "Account", n: "Account", i: "👤" }].map(t => (
           <div key={t.id} onClick={() => setTab(t.id)} style={{ textAlign: "center", cursor: "pointer", flex: 1 }}>
