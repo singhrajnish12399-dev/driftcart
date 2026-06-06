@@ -74,7 +74,8 @@ onChange={(e) => setSearch(e.target.value)}
     fontWeight: "bold"
   }}
 >
-  🔥 Mega Sale - Up to 70% Off 🔥
+  🔥 Mega Sale - Up to 70% Off
+🛍️ Free Delivery | ⚡ Fast Shipping
 </div>
 <input
   type="text"
