@@ -105,7 +105,7 @@ onChange={(e) => setSearch(e.target.value)}
           <hr />
         </div>
       ))}
-    </div>
+   
 <div
   style={{
     position: "fixed",
