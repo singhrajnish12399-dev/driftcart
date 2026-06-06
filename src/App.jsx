@@ -124,6 +124,7 @@ onChange={(e) => setSearch(e.target.value)}
   <span>🛒 Cart</span>
   <span>👤 Account</span>
 </div>
+</div>
   );
 }
 
