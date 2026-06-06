@@ -105,7 +105,6 @@ onChange={(e) => setSearch(e.target.value)}
           <hr />
         </div>
     ))}
-}
 
 <div
   style={{
