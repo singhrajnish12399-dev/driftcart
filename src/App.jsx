@@ -61,6 +61,17 @@ onChange={(e) => setSearch(e.target.value)}
   <button>Shoes</button>
 </div>
       <p>Welcome to my shopping app</p>
+<input
+  type="text"
+  placeholder="Enter your name"
+  value={username}
+  onChange={(e) => setUsername(e.target.value)}
+  style={{
+    width: "100%",
+    padding: "10px",
+    marginBottom: "10px"
+  }}
+/>
 
       {products
   .filter((product) =>
