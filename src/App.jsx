@@ -10,15 +10,15 @@ function App() {
 
   // 1. Array me image properties add kar di gayi hain real image URLs ke sath
   const products = [
-    { id: 1, category: "Fashion", name: "Zara Slim Shirt", price: 1999, rating: "4.3", image: "https://picsum.photos" },
-    { id: 2, category: "Fashion", name: "Levi's Jacket", price: 3499, rating: "4.5", image: "https://picsum.photos" },
-    { id: 6, category: "Electronics", name: "iPhone 15 Pro", price: 139900, rating: "4.9", image: "https://picsum.photos" },
-    { id: 7, category: "Electronics", name: "MacBook Air M3", price: 114900, rating: "4.8", image: "https://picsum.photos" },
-    { id: 11, category: "Watches", name: "Casio Vintage", price: 1695, rating: "4.3", image: "https://picsum.photos" },
-    { id: 12, category: "Watches", name: "Fossil Chrono", price: 9495, rating: "4.4", image: "https://picsum.photos" },
-    { id: 16, category: "Shoes", name: "PUMA x one8 Kohli", price: 3999, rating: "4.8", image: "https://picsum.photos" },
-    { id: 17, category: "Shoes", name: "Nike Air Max", price: 7995, rating: "4.6", image: "https://picsum.photos" }
-  ];
+  { id: 1, category: "Fashion", name: "Zara Slim Shirt", price: 1999, rating: "4.3", image: "https://unsplash.com" },
+  { id: 2, category: "Fashion", name: "Levi's Jacket", price: 3499, rating: "4.5", image: "https://unsplash.com" },
+  { id: 6, category: "Electronics", name: "iPhone 15 Pro", price: 139900, rating: "4.9", image: "https://unsplash.com" },
+  { id: 7, category: "Electronics", name: "MacBook Air M3", price: 114900, rating: "4.8", image: "https://unsplash.com" },
+  { id: 11, category: "Watches", name: "Casio Vintage", price: 1695, rating: "4.3", image: "https://unsplash.com" },
+  { id: 12, category: "Watches", name: "Fossil Chrono", price: 9495, rating: "4.4", image: "https://unsplash.com" },
+  { id: 16, category: "Shoes", name: "PUMA x one8 Kohli", price: 3999, rating: "4.8", image: "https://unsplash.com" },
+  { id: 17, category: "Shoes", name: "Nike Air Max", price: 7995, rating: "4.6", image: "https://unsplash.com" }
+];
 
   if (!isLoggedIn) {
     return (
