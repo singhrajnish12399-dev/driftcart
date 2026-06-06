@@ -81,6 +81,9 @@ onChange={(e) => setSearch(e.target.value)}
 >
   Login
 </button>
+{isLoggedIn && (
+  <h3>Welcome {username} 👋</h3>
+)}
 
       {products
   .filter((product) =>
