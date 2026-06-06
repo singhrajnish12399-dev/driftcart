@@ -82,7 +82,19 @@ onChange={(e) => setSearch(e.target.value)}
   Login
 </button>
 {isLoggedIn && (
-  <h3>Welcome {username} 👋</h3>
+  <>
+    <h3>Welcome {username} 👋</h3>
+
+    <button
+      onClick={() => setIsLoggedIn(false)}
+      style={{
+        padding: "10px 15px",
+        marginBottom: "15px"
+      }}
+    >
+      Logout
+    </button>
+  </>
 )}
 
       {products
