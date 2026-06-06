@@ -72,15 +72,17 @@ onChange={(e) => setSearch(e.target.value)}
     marginBottom: "10px"
   }}
 />
-<button
-  onClick={() => setIsLoggedIn(true)}
-  style={{
-    padding: "10px 15px",
-    marginBottom: "15px"
-  }}
->
-  Login
-</button>
+{!isLoggedIn && (
+  <button
+    onClick={() => setIsLoggedIn(true)}
+    style={{
+      padding: "10px 15px",
+      marginBottom: "15px"
+    }}
+  >
+    Login
+  </button>
+)}
 {isLoggedIn && (
   <>
     <h3>Welcome {username} 👋</h3>
