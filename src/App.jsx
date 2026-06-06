@@ -1,89 +1,126 @@
 import React from "react";
 function App() {
-  const [cartCount, setCartCount] = React.useState(0);
-  const [cartItems, setCartItems] = React.useState([]);
+  const [cart, setCart] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [username, setUsername] = React.useState("");
-  const [wishlistCount, setWishlistCount] = React.useState(0);
-  const [wishlistItems, setWishlistItems] = React.useState([]);
-  const [selectedCategory, setSelectedCategory] = React.useState("All");
+  const [cat, setCat] = React.useState("All");
+  const [tab, setTab] = React.useState("Home");
 
-  // Maine yahan par sabhi products ke liye high-quality aur stable image links daal diye hain
   const products = [
-    { id: 1, category: "Fashion", name: "Zara Slim Shirt", price: "₹1,999", rating: "4.3", image: "https://pexels.com" },
-    { id: 2, category: "Fashion", name: "Levi's Denim Jacket", price: "₹3,499", rating: "4.5", image: "https://pexels.com" },
-    { id: 6, category: "Electronics", name: "iPhone 15 Pro Max", price: "₹1,39,900", rating: "4.9", image: "https://pexels.com" },
-    { id: 7, category: "Electronics", name: "MacBook Air M3", price: "₹1,14,900", rating: "4.8", image: "https://pexels.com" },
-    { id: 11, category: "Watches", name: "Casio Vintage Watch", price: "₹1,695", rating: "4.3", image: "https://pexels.com" },
-    { id: 12, category: "Watches", name: "Fossil Chronograph", price: "₹9,495", rating: "4.4", image: "https://pexels.com" },
-    { id: 16, category: "Shoes", name: "PUMA x one8 Virat Kohli", price: "₹3,999", rating: "4.8", image: "https://pexels.com" },
-    { id: 17, category: "Shoes", name: "Nike Air Max Sneakers", price: "₹7,995", rating: "4.6", image: "https://pexels.com" }
+    { id: 1, category: "Fashion", name: "Zara Slim Shirt", price: 1999, rating: "4.3", image: "https://pexels.com" },
+    { id: 2, category: "Fashion", name: "Levi's Jacket", price: 3499, rating: "4.5", image: "https://pexels.com" },
+    { id: 6, category: "Electronics", name: "iPhone 15 Pro", price: 139900, rating: "4.9", image: "https://pexels.com" },
+    { id: 7, category: "Electronics", name: "MacBook Air M3", price: 114900, rating: "4.8", image: "https://pexels.com" },
+    { id: 11, category: "Watches", name: "Casio Vintage", price: 1695, rating: "4.3", image: "https://pexels.com" },
+    { id: 12, category: "Watches", name: "Fossil Chrono", price: 9495, rating: "4.4", image: "https://pexels.com" },
+    { id: 16, category: "Shoes", name: "PUMA x one8 Kohli", price: 3999, rating: "4.8", image: "https://pexels.com" },
+    { id: 17, category: "Shoes", name: "Nike Air Max", price: 7995, rating: "4.6", image: "https://pexels.com" }
   ];
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    if (!username.trim()) return alert("Kripya apna naam darj karein!");
-    setIsLoggedIn(true);
-  };
 
   if (!isLoggedIn) {
     return (
       <div style={{ padding: "20px", fontFamily: "sans-serif", maxWidth: "400px", margin: "50px auto", textAlign: "center" }}>
-        <div style={{ background: "#2874f0", color: "white", padding: "30px", borderRadius: "15px", marginBottom: "30px" }}>
-          <h1 style={{ margin: 0 }}>🛒 DriftCart</h1>
-          <p style={{ margin: "10px 0 0 0", opacity: 0.9 }}>Shop Smart, Shop Fast</p>
+        <div style={{ background: "#2874f0", color: "white", padding: "25px", borderRadius: "12px", marginBottom: "20px" }}>
+          <h2>🛒 DriftCart</h2><p style={{ margin: 0, opacity: 0.9 }}>Shop Smart, Shop Fast</p>
         </div>
-        <form onSubmit={handleLogin} style={{ border: "1px solid #ddd", padding: "25px", borderRadius: "12px", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
-          <h2 style={{ marginBottom: "20px", color: "#333" }}>Login / Sign Up</h2>
-          <input type="text" placeholder="Enter your name" value={username} onChange={(e) => setUsername(e.target.value)} style={{ width: "100%", padding: "12px", marginBottom: "20px", borderRadius: "8px", border: "1px solid #ccc", boxSizing: "border-box" }} />
-          <button type="submit" style={{ width: "100%", background: "#2874f0", color: "white", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "bold", cursor: "pointer" }}>Get Started 🚀</button>
+        <form onSubmit={(e) => { e.preventDefault(); if(username.trim()) setIsLoggedIn(true); }} style={{ border: "1px solid #ddd", padding: "20px", borderRadius: "8px" }}>
+          <h3 style={{ marginTop: 0 }}>Login / Sign Up</h3>
+          <input type="text" placeholder="Enter your name" value={username} onChange={(e) => setUsername(e.target.value)} style={{ width: "100%", padding: "10px", marginBottom: "15px", borderRadius: "5px", border: "1px solid #ccc", boxSizing: "border-box" }} />
+          <button type="submit" style={{ width: "100%", background: "#2874f0", color: "white", border: "none", padding: "10px", borderRadius: "5px", fontWeight: "bold" }}>Get Started 🚀</button>
         </form>
       </div>
     );
   }
 
-  const filteredProducts = products.filter(p => p.name.toLowerCase().includes(search.toLowerCase()) && (selectedCategory === "All" || p.category === selectedCategory));
+  const filtered = products.filter(p => p.name.toLowerCase().includes(search.toLowerCase()) && (cat === "All" || p.category === cat));
+  const totalBill = cart.reduce((s, item) => s + item.price, 0);
 
   return (
-    <div style={{ padding: "15px", paddingBottom: "80px", fontFamily: "sans-serif", maxWidth: "600px", margin: "0 auto" }}>
-      <div style={{ background: "#2874f0", color: "white", padding: "15px", borderRadius: "10px", marginBottom: "20px" }}>
-        <h1>🛒 DriftCart</h1>
-        <p style={{ fontSize: "14px", opacity: 0.9 }}>👤 User: <b>{username}</b> | 🛒 Cart: {cartCount} | ❤️ Wish: {wishlistCount}</p>
-      </div>
-
-      <input type="text" placeholder="🔍 Search products..." value={search} onChange={(e) => setSearch(e.target.value)} style={{ width: "100%", padding: "12px", marginBottom: "20px", borderRadius: "8px", border: "1px solid #ccc", boxSizing: "border-box" }} />
-
-      <div style={{ display: "flex", gap: "10px", marginBottom: "20px", overflowX: "auto", paddingBottom: "5px" }}>
-        {["All", "Fashion", "Electronics", "Watches", "Shoes"].map(cat => (
-          <button key={cat} onClick={() => setSelectedCategory(cat)} style={{ padding: "8px 15px", borderRadius: "20px", border: "1px solid #2874f0", background: selectedCategory === cat ? "#2874f0" : "white", color: selectedCategory === cat ? "white" : "#2874f0", fontWeight: "bold", cursor: "pointer" }}>{cat}</button>
-        ))}
-      </div>
-
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px", background: "#f9f9f9", padding: "10px", borderRadius: "8px" }}>
-        <span>Welcome <b>{username}</b> 👋</span>
-        <button onClick={() => { setIsLoggedIn(false); setUsername(""); }} style={{ background: "#ff4d4d", color: "white", border: "none", padding: "6px 12px", borderRadius: "5px", cursor: "pointer" }}>Logout</button>
-      </div>
-
-      <h3>{selectedCategory} Products ({filteredProducts.length})</h3>
-      {filteredProducts.map(product => (
-        <div key={product.id} style={{ border: "1px solid #ddd", borderRadius: "10px", padding: "15px", marginBottom: "15px", background: "white" }}>
-          <img src={product.image} alt={product.name} style={{ width: "100%", height: "200px", objectFit: "cover", borderRadius: "10px", marginBottom: "10px" }} />
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <h4 style={{ margin: "5px 0" }}>{product.name}</h4>
-            <span style={{ background: "green", color: "white", padding: "2px 6px", borderRadius: "4px", fontSize: "12px" }}>⭐ {product.rating}</span>
-          </div>
-          <p style={{ fontSize: "16px", fontWeight: "bold", color: "#2874f0", margin: "5px 0 10px 0" }}>{product.price}</p>
-          <button onClick={() => {setCartCount(cartCount + 1); setCartItems([...cartItems, product]);}} style={{ background: "#2874f0", color: "white", border: "none", padding: "8px 12px", borderRadius: "5px", cursor: "pointer" }}>Add to Cart</button>
-          <button onClick={() => {setWishlistCount(wishlistCount + 1); setWishlistItems([...wishlistItems, product]);}} style={{ marginLeft: "10px", padding: "8px 12px", borderRadius: "5px", border: "1px solid #ccc", background: "white", cursor: "pointer" }}>❤️ Wishlist</button>
+    <div style={{ fontFamily: "sans-serif", maxWidth: "450px", margin: "0 auto", background: "#f1f3f6", minHeight: "100vh", paddingBottom: "60px" }}>
+      {/* Top Header */}
+      <div style={{ background: "#2874f0", color: "white", padding: "10px 15px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "5px" }}>
+          <h3 style={{ margin: 0, fontStyle: "italic" }}>DriftCart</h3><span>Hi, {username} 👋</span>
         </div>
-      ))}
+        <div style={{ fontSize: "11px", background: "rgba(255,255,255,0.15)", padding: "4px 8px", borderRadius: "4px" }}>📍 Deliver to: <b>Bhojpur, Bihar...</b></div>
+      </div>
 
-      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: "white", borderTop: "1px solid #ddd", display: "flex", justifyContent: "space-around", padding: "12px" }}>
-        <span onClick={() => setSelectedCategory("All")} style={{ cursor: "pointer", fontWeight: "bold", color: "#2874f0" }}>🏠 Home</span>
-        <span>❤️ Wish ({wishlistCount})</span>
-        <span>🛒 Cart ({cartCount})</span>
-        <span>👤 Account</span>
+      {/* Search bar */}
+      <div style={{ padding: "8px 15px", background: "#2874f0" }}>
+        <input type="text" placeholder="🔍 Search products, brands and more" value={search} onChange={(e) => setSearch(e.target.value)} style={{ width: "100%", padding: "8px 10px", borderRadius: "4px", border: "none", boxSizing: "border-box" }} />
+      </div>
+
+      {/* HOME TAB VIEW */}
+      {tab === "Home" && (
+        <div>
+          {/* Categories icons grid */}
+          <div style={{ display: "flex", gap: "12px", background: "white", padding: "12px 10px", overflowX: "auto", borderBottom: "1px solid #ddd" }}>
+            {[{ id: "All", n: "For You", i: "🎁" }, { id: "Fashion", n: "Fashion", i: "👕" }, { id: "Electronics", n: "Mobiles", i: "📱" }, { id: "Watches", n: "Watches", i: "⌚" }, { id: "Shoes", n: "Shoes", i: "👟" }].map(c => (
+              <div key={c.id} onClick={() => setCat(c.id)} style={{ textAlign: "center", minWidth: "60px", cursor: "pointer" }}>
+                <div style={{ fontSize: "20px", background: cat === c.id ? "#e0ecff" : "#f6f6f6", width: "40px", height: "40px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 4px auto", border: cat === c.id ? "1.5px solid #2874f0" : "none" }}>{c.i}</div>
+                <span style={{ fontSize: "11px", color: cat === c.id ? "#2874f0" : "#333" }}>{c.n}</span>
+              </div>
+            ))}
+          </div>
+          {/* Flipkart layout 2-Column Product Display */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px", padding: "6px" }}>
+            {filtered.map(p => (
+              <div key={p.id} style={{ border: "1px solid #e0e0e0", borderRadius: "6px", padding: "8px", background: "white", position: "relative", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                <img src={p.image} style={{ width: "100%", height: "110px", objectFit: "cover", borderRadius: "4px" }} />
+                <span style={{ position: "absolute", top: "12px", right: "12px", background: "green", color: "white", padding: "1px 4px", borderRadius: "3px", fontSize: "10px" }}>★ {p.rating}</span>
+                <div style={{ marginTop: "4px" }}>
+                  <h4 style={{ margin: "0 0 2px 0", fontSize: "12px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.name}</h4>
+                  <p style={{ fontSize: "14px", fontWeight: "bold", margin: "0 0 6px 0" }}>₹{p.price.toLocaleString("en-IN")}</p>
+                </div>
+                <button onClick={() => setCart([...cart, p])} style={{ width: "100%", background: "#ff9f00", color: "white", border: "none", padding: "5px", borderRadius: "4px", fontSize: "11px", fontWeight: "bold" }}>+ Add to Cart</button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* CART TAB VIEW */}
+      {tab === "Cart" && (
+        <div style={{ padding: "10px" }}>
+          <div style={{ background: "white", padding: "12px", borderRadius: "6px" }}>
+            <h4 style={{ margin: "0 0 10px 0" }}>My Cart ({cart.length} Items)</h4>
+            {cart.length === 0 ? <p style={{ textAlign: "center", color: "#666", fontSize: "14px" }}>Aapka cart khali hai! 🛒</p> : 
+              <div>
+                {cart.map((item, idx) => (
+                  <div key={idx} style={{ display: "flex", gap: "10px", padding: "8px 0", borderBottom: "1px solid #f0f0f0" }}>
+                    <img src={item.image} style={{ width: "40px", height: "40px", objectFit: "cover", borderRadius: "4px" }} />
+                    <div><h5 style={{ margin: 0 }}>{item.name}</h5><p style={{ margin: 0, fontSize: "13px", fontWeight: "bold", color: "#2874f0" }}>₹{item.price}</p></div>
+                  </div>
+                ))}
+                <div style={{ marginTop: "12px", background: "#f9f9f9", padding: "8px", borderRadius: "4px", fontSize: "13px" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontWeight: "bold", color: "green" }}><span>Total Amount:</span><span>₹{totalBill.toLocaleString("en-IN")}</span></div>
+                </div>
+                <button style={{ width: "100%", background: "#fb641b", color: "white", border: "none", padding: "10px", borderRadius: "4px", fontWeight: "bold", marginTop: "10px" }}>Proceed to Checkout 🚀</button>
+              </div>
+            }
+          </div>
+        </div>
+      )}
+
+      {/* ACCOUNT TAB VIEW */}
+      {tab === "Account" && (
+        <div style={{ padding: "10px" }}>
+          <div style={{ background: "white", padding: "15px", borderRadius: "6px", textAlign: "center" }}>
+            <div style={{ fontSize: "40px" }}>👤</div><h3>{username}</h3>
+            <button onClick={() => { setIsLoggedIn(false); setUsername(""); setTab("Home"); }} style={{ width: "100%", background: "#ff4d4d", color: "white", border: "none", padding: "8px", borderRadius: "4px", fontWeight: "bold" }}>Logout Account</button>
+          </div>
+        </div>
+      )}
+
+      {/* Bottom Navigation */}
+      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: "white", borderTop: "1px solid #ddd", display: "flex", justifyContent: "space-around", padding: "6px 0", zIndex: 200 }}>
+        {[{ id: "Home", n: "Home", i: "🏠" }, { id: "Cart", n: "Cart", i: `🛒${cart.length ? `(${cart.length})` : ""}` }, { id: "Account", n: "Account", i: "👤" }].map(t => (
+          <div key={t.id} onClick={() => setTab(t.id)} style={{ textAlign: "center", cursor: "pointer", flex: 1 }}>
+            <div style={{ fontSize: "16px" }}>{t.i}</div>
+            <span style={{ fontSize: "10px", color: tab === t.id ? "#2874f0" : "#666", fontWeight: tab === t.id ? "bold" : "normal" }}>{t.n}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
