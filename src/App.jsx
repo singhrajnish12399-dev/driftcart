@@ -3,7 +3,7 @@ import React from "react";
 function App() {
   const [search, setSearch] = React.useState("");
 
-  // Category Categories icons ke sath
+  // Category items layout ke liye
   const categories = [
     { id: "foryou", n: "For You", i: "🎁" },
     { id: "fashion", n: "Fashion", i: "👕" },
@@ -13,7 +13,7 @@ function App() {
     { id: "home", n: "Home", i: "🏠" },
   ];
 
-  // Grid/Scroll items ke liye dummy products
+  // Grid/Scroll items ke liye data
   const gridProducts = [
     { id: 1, name: "Laptops", i: "💻", bg: "#e3f2fd" },
     { id: 2, name: "Men's Slippers", i: "👟", bg: "#f1f8e9" },
@@ -24,27 +24,17 @@ function App() {
   return (
     <div style={{ fontFamily: "sans-serif", maxWidth: "450px", margin: "0 auto", background: "#f1f3f6", minHeight: "100vh", paddingBottom: "70px", boxSizing: "border-box" }}>
       
-      {/* 1. Top Header Tab Toggle (Flipkart / Travel) */}
+      {/* 1. Top Header Tab Toggle (DriftCart / Drift Travel) */}
       <div style={{ display: "flex", background: "white", padding: "8px 12px", gap: "10px" }}>
         <button style={{ flex: 1, background: "#2874f0", color: "white", border: "none", padding: "10px", borderRadius: "8px", fontWeight: "bold", display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", fontSize: "14px" }}>
-          🛒 Flipkart
+          🛒 DriftCart
         </button>
         <button style={{ flex: 1, background: "#f0f2f5", color: "#333", border: "1px solid #ddd", padding: "10px", borderRadius: "8px", fontWeight: "bold", display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", fontSize: "14px" }}>
-          ✈️ Travel
+          ✈️ Drift Travel
         </button>
       </div>
 
-      {/* 2. Delivery Location Bar */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: "#f0f5ff", padding: "8px 12px", borderBottom: "1px solid #e0e0e0" }}>
-        <div style={{ fontSize: "12px", color: "#333", display: "flex", alignItems: "center", gap: "4px" }}>
-          📍 <span style={{ fontWeight: "600" }}>Kaup Kali Mandi, Rajput toli, Bhojpur...</span> ⬇️
-        </div>
-        <div style={{ fontSize: "12px", background: "amber", color: "#ff9f00", fontWeight: "bold", display: "flex", alignItems: "center" }}>
-          ⚡ 0
-        </div>
-      </div>
-
-      {/* 3. Search Bar Section (With Camera and Lens icon placeholders) */}
+      {/* 2. Search Bar Section */}
       <div style={{ padding: "10px 12px", background: "white" }}>
         <div style={{ display: "flex", alignItems: "center", background: "#f0f2f5", borderRadius: "8px", padding: "2px 10px", border: "1px solid #ccc" }}>
           <span style={{ fontSize: "16px", color: "#888" }}>🔍</span>
@@ -60,7 +50,7 @@ function App() {
         </div>
       </div>
 
-      {/* 4. Horizontal Categories Scroll Menu */}
+      {/* 3. Horizontal Categories Scroll Menu */}
       <div style={{ display: "flex", gap: "15px", background: "white", padding: "12px 10px", overflowX: "auto", borderBottom: "1px solid #ddd" }}>
         {categories.map(c => (
           <div key={c.id} style={{ textAlign: "center", minWidth: "65px", cursor: "pointer" }}>
@@ -72,7 +62,7 @@ function App() {
         ))}
       </div>
 
-      {/* 5. Exclusive Coupon Banner Section */}
+      {/* 4. Exclusive Coupon Banner Section */}
       <div style={{ padding: "10px 12px" }}>
         <div style={{ background: "#e3f2fd", border: "1px dashed #2874f0", borderRadius: "8px", padding: "10px 15px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
@@ -84,15 +74,14 @@ function App() {
         </div>
       </div>
 
-      {/* 6. Big Smartphone Launch Hero Banner Ads */}
+      {/* 5. Big Smartphone Launch Hero Banner Ads (DriftCart branded) */}
       <div style={{ padding: "0 12px 10px 12px" }}>
         <div style={{ background: "linear-gradient(135deg, #0d47a1 0%, #002171 100%)", color: "white", borderRadius: "12px", padding: "20px", position: "relative", overflow: "hidden", minHeight: "130px" }}>
-          <div style={{ fontSize: "12px", opacity: 0.8, fontWeight: "bold" }}>Flipkart 🛒</div>
+          <div style={{ fontSize: "12px", opacity: 0.8, fontWeight: "bold" }}>DriftCart 🛒</div>
           <h2 style={{ margin: "5px 0 2px 0", fontSize: "20px", fontWeight: "900" }}>realme P4R 5G</h2>
           <p style={{ margin: "0 0 5px 0", fontSize: "13px", color: "#ffeb3b", fontWeight: "bold" }}>Launch 10th June, 12 PM</p>
           <p style={{ margin: 0, fontSize: "11px", opacity: 0.9 }}>Biggest 8000mAh Battery*</p>
           
-          {/* Absolute Background Graphics to match image feel */}
           <div style={{ position: "absolute", right: "-10px", bottom: "-10px", fontSize: "85px", opacity: 0.15, fontWeight: "900" }}>
             8000
           </div>
@@ -103,7 +92,7 @@ function App() {
         </div>
       </div>
 
-      {/* 7. Product Horizontal Scroll List (Like "Laptops", "Moisturizer") */}
+      {/* 6. Product Horizontal Scroll List */}
       <div style={{ background: "white", padding: "15px 12px", marginBottom: "10px" }}>
         <div style={{ display: "flex", gap: "12px", overflowX: "auto" }}>
           {gridProducts.map(p => (
@@ -117,7 +106,7 @@ function App() {
         </div>
       </div>
 
-      {/* 8. Bottom Mini Banners Row */}
+      {/* 7. Bottom Mini Banners Row */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px", padding: "0 12px" }}>
         <div style={{ background: "#212121", color: "white", height: "60px", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", fontWeight: "bold", position: "relative" }}>
           Adidas 👟 <span style={{ position: "absolute", right: "4px", bottom: "2px", fontSize: "7px", opacity: 0.6 }}>AD</span>
@@ -130,7 +119,7 @@ function App() {
         </div>
       </div>
 
-      {/* 9. Flipkart Sticky Professional Bottom Navigation Bar */}
+      {/* 8. Bottom Navigation Bar */}
       <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: "white", borderTop: "1px solid #e0e0e0", display: "flex", justifyContent: "space-around", padding: "8px 0", zIndex: 1000, maxWidth: "450px", margin: "0 auto" }}>
         <div style={{ textAlign: "center", flex: 1, cursor: "pointer", color: "#2874f0" }}>
           <div style={{ fontSize: "20px" }}>🏠</div>
