@@ -72,6 +72,15 @@ onChange={(e) => setSearch(e.target.value)}
     marginBottom: "10px"
   }}
 />
+<button
+  onClick={() => setIsLoggedIn(true)}
+  style={{
+    padding: "10px 15px",
+    marginBottom: "15px"
+  }}
+>
+  Login
+</button>
 
       {products
   .filter((product) =>
