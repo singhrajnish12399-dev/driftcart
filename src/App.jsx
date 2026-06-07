@@ -70,14 +70,31 @@ category: "Electronics",
         "https://images.unsplash.com/photo-1496181133206-80ce9b88a853"
     },
     {
-      id: 6,
-category: "Mobiles",
-      name: "Mobile Phone",
-      price: 15999,
-      image:
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
-    }
-  ];
+      {
+  id: 6,
+  category: "Mobiles",
+  name: "Mobile Phone",
+  price: 15999,
+  image:
+    "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
+},
+{
+  id: 7,
+  category: "Beauty",
+  name: "Lipstick",
+  price: 299,
+  image:
+    "https://images.unsplash.com/photo-1586495777744-4413f21062fa"
+},
+{
+  id: 8,
+  category: "Beauty",
+  name: "Makeup Kit",
+  price: 999,
+  image:
+    "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9"
+}
+];
 
   const addCart = (item) => {
     setCart([...cart, item]);
