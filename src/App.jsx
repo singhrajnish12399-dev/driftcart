@@ -70,7 +70,7 @@ category: "Electronics",
         "https://images.unsplash.com/photo-1496181133206-80ce9b88a853"
     },
     {
-      {
+      
   id: 6,
   category: "Mobiles",
   name: "Mobile Phone",
