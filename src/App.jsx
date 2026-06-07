@@ -153,10 +153,12 @@ category: "Mobiles",
 
           <div className="product-grid">
             {products
-              .filter((p) =>
-                p.name
-                  .toLowerCase()
-                  .includes(search.toLowerCase())
+              .filter(
+  (p) =>
+    p.name.toLowerCase().includes(search.toLowerCase()) &&
+    (selectedCategory === "All" ||
+      p.category === selectedCategory)
+)
               )
               .map((product) => (
                 <div
