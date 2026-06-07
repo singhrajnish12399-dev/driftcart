@@ -97,12 +97,21 @@ body {
 
 /* Categories */
 
-.categories {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding: 10px;
+.categories div {
+  min-width: 100px;
+  text-align: center;
+  padding: 12px;
+  border-radius: 14px;
   background: white;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .categories div {
