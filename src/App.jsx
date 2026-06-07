@@ -7,6 +7,7 @@ function App() {
 
   const [page, setPage] = useState("home");
   const [search, setSearch] = useState("");
+const [selectedCategory, setSelectedCategory] = useState("All");
 
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
