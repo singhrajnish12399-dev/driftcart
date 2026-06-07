@@ -269,3 +269,7 @@ body {
   font-weight: 600;
   cursor: pointer;
 }
+.active-category {
+  background: #2874f0 !important;
+  color: white;
+}
