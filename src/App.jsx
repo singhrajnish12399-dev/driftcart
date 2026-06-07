@@ -141,10 +141,33 @@ category: "Mobiles",
           </div>
 
           <div className="categories">
-  <div onClick={() => setSelectedCategory("All")}>🔥 All</div>
-  <div onClick={() => setSelectedCategory("Mobiles")}>📱 Mobiles</div>
-  <div onClick={() => setSelectedCategory("Fashion")}>👕 Fashion</div>
-  <div onClick={() => setSelectedCategory("Electronics")}>💻 Electronics</div>
+  <div
+    className={selectedCategory === "All" ? "active-category" : ""}
+    onClick={() => setSelectedCategory("All")}
+  >
+    🔥 All
+  </div>
+
+  <div
+    className={selectedCategory === "Mobiles" ? "active-category" : ""}
+    onClick={() => setSelectedCategory("Mobiles")}
+  >
+    📱 Mobiles
+  </div>
+
+  <div
+    className={selectedCategory === "Fashion" ? "active-category" : ""}
+    onClick={() => setSelectedCategory("Fashion")}
+  >
+    👕 Fashion
+  </div>
+
+  <div
+    className={selectedCategory === "Electronics" ? "active-category" : ""}
+    onClick={() => setSelectedCategory("Electronics")}
+  >
+    💻 Electronics
+  </div>
 </div>
 
           <h3 className="section-title">
