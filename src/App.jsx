@@ -168,6 +168,12 @@ category: "Mobiles",
   >
     💻 Electronics
   </div>
+<div
+  className={selectedCategory === "Beauty" ? "active-category" : ""}
+  onClick={() => setSelectedCategory("Beauty")}
+>
+  💄 Beauty
+</div>
 </div>
 
           <h3 className="section-title">
