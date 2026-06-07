@@ -135,13 +135,11 @@ const [selectedCategory, setSelectedCategory] = useState("All");
           </div>
 
           <div className="categories">
-            <div>📱 Mobiles</div>
-            <div>👕 Fashion</div>
-            <div>💻 Electronics</div>
-            <div>🏠 Home</div>
-            <div>🎮 Gaming</div>
-            <div>🧴 Beauty</div>
-          </div>
+  <div onClick={() => setSelectedCategory("All")}>🔥 All</div>
+  <div onClick={() => setSelectedCategory("Mobiles")}>📱 Mobiles</div>
+  <div onClick={() => setSelectedCategory("Fashion")}>👕 Fashion</div>
+  <div onClick={() => setSelectedCategory("Electronics")}>💻 Electronics</div>
+</div>
 
           <h3 className="section-title">
             Trending Products
