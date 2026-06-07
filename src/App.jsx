@@ -31,6 +31,7 @@ const [selectedCategory, setSelectedCategory] = useState("All");
   const products = [
     {
       id: 1,
+category: "Fashion",
       name: "Premium T-Shirt",
       price: 499,
       image:
@@ -38,6 +39,7 @@ const [selectedCategory, setSelectedCategory] = useState("All");
     },
     {
       id: 2,
+category: "Fashion",
       name: "Running Shoes",
       price: 1499,
       image:
@@ -45,6 +47,7 @@ const [selectedCategory, setSelectedCategory] = useState("All");
     },
     {
       id: 3,
+category: "Electronics",
       name: "Smart Watch",
       price: 999,
       image:
@@ -52,6 +55,7 @@ const [selectedCategory, setSelectedCategory] = useState("All");
     },
     {
       id: 4,
+category: "Electronics",
       name: "Headphones",
       price: 1999,
       image:
@@ -59,6 +63,7 @@ const [selectedCategory, setSelectedCategory] = useState("All");
     },
     {
       id: 5,
+category: "Electronics",
       name: "Laptop",
       price: 45999,
       image:
@@ -66,6 +71,7 @@ const [selectedCategory, setSelectedCategory] = useState("All");
     },
     {
       id: 6,
+category: "Mobiles",
       name: "Mobile Phone",
       price: 15999,
       image:
