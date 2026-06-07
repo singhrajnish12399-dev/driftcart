@@ -159,7 +159,7 @@ category: "Mobiles",
     (selectedCategory === "All" ||
       p.category === selectedCategory)
 )
-              )
+              
               .map((product) => (
                 <div
                   className="product-card"
