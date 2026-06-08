@@ -332,12 +332,14 @@ category: "Electronics",
             <button
               className="logout-btn"
               onClick={() => {
-                setLoggedIn(false);
-                setName("");
-                setCart([]);
-                setWishlist([]);
-                setPage("home");
-              }}
+  localStorage.clear();
+
+  setLoggedIn(false);
+  setName("");
+  setCart([]);
+  setWishlist([]);
+  setPage("home");
+}}
             >
               Logout
             </button>
