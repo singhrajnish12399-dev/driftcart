@@ -121,8 +121,17 @@ category: "Electronics",
 };
 
   const addWishlist = (item) => {
-    setWishlist([...wishlist, item]);
-  };
+  const updatedWishlist = [...wishlist];
+
+  updatedWishlist.push(item);
+
+  setWishlist(updatedWishlist);
+
+  localStorage.setItem(
+    "wishlist",
+    JSON.stringify(updatedWishlist)
+  );
+};
 
   if (!loggedIn) {
     return (
