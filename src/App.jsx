@@ -220,7 +220,6 @@ category: "Electronics",
     onChange={(e) => setSearch(e.target.value)}
   />
 
-</div>
 
           </div>
 
