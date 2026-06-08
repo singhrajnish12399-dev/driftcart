@@ -306,6 +306,13 @@ category: "Electronics",
               </div>
             ))
           )}
+<h3 style={{ marginTop: "15px" }}>
+  Total: ₹
+  {cart.reduce(
+    (total, item) => total + item.price,
+    0
+  )}
+</h3>
         </div>
       )}
 
