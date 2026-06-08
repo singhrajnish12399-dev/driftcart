@@ -110,8 +110,15 @@ category: "Electronics",
 ];
 
   const addCart = (item) => {
-    setCart([...cart, item]);
-  };
+  const updatedCart = [...cart, item];
+
+  setCart(updatedCart);
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(updatedCart)
+  );
+};
 
   const addWishlist = (item) => {
     setWishlist([...wishlist, item]);
