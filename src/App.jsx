@@ -222,7 +222,12 @@ category: "Electronics",
 
 </div>
 
-          <div className="categories">
+          </div>
+
+{page === "home" && (
+  <>
+
+<div className="categories">
   <div
     className={selectedCategory === "All" ? "active-category" : ""}
     onClick={() => setSelectedCategory("All")}
