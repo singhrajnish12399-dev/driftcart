@@ -185,24 +185,42 @@ category: "Electronics",
     <div className="app">
 
       <div className="header">
-        <h2>🛒 DriftCart</h2>
 
-        <input
-          className="search"
-          placeholder="Search products..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+  <div className="top-header">
+
+    <div className="menu-logo">
+      <div className="menu-icon">☰</div>
+
+      <div>
+        <h2>🛒 DriftCart</h2>
+        <p>Your Shopping Destination</p>
+      </div>
+    </div>
+
+    <div className="header-icons">
+
+      <div onClick={() => setPage("wishlist")}>
+        ❤️
+        <span>{wishlist.length}</span>
       </div>
 
-      {page === "home" && (
-        <>
-          <div className="banner">
-            <img
-              src={banners[currentBanner]}
-              alt="banner"
-            />
-          </div>
+      <div onClick={() => setPage("cart")}>
+        🛒
+        <span>{cart.length}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <input
+    className="search"
+    placeholder="Search for products, brands and more..."
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+  />
+
+</div>
 
           <div className="categories">
   <div
