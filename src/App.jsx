@@ -1,16 +1,29 @@
 import React, { useState, useEffect } from "react";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [name, setName] = useState("");
-  const [tempName, setTempName] = useState("");
+  const [loggedIn, setLoggedIn] = useState(
+  JSON.parse(localStorage.getItem("loggedIn")) || false
+);
 
-  const [page, setPage] = useState("home");
-  const [search, setSearch] = useState("");
+const [name, setName] = useState(
+  localStorage.getItem("name") || ""
+);
+
+const [tempName, setTempName] = useState("");
+
+const [page, setPage] = useState("home");
+
+const [search, setSearch] = useState("");
+
 const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const [cart, setCart] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
+const [cart, setCart] = useState(
+  JSON.parse(localStorage.getItem("cart")) || []
+);
+
+const [wishlist, setWishlist] = useState(
+  JSON.parse(localStorage.getItem("wishlist")) || []
+);
 
   const banners = [
     "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da",
