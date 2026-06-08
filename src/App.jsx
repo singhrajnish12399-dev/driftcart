@@ -141,7 +141,7 @@ category: "Electronics",
   localStorage.setItem("name", tempName);
   localStorage.setItem("loggedIn", "true");
 }
-              }
+              
             }}
           >
             Login / Signup
