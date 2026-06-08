@@ -287,6 +287,22 @@ category: "Electronics",
                   <h4>{item.name}</h4>
                   <p>₹{item.price}</p>
                 </div>
+<button
+  onClick={() => {
+    const updatedCart = cart.filter(
+      (_, i) => i !== index
+    );
+
+    setCart(updatedCart);
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(updatedCart)
+    );
+  }}
+>
+  ❌ Remove
+</button>
               </div>
             ))
           )}
@@ -307,6 +323,23 @@ category: "Electronics",
                   <h4>{item.name}</h4>
                   <p>₹{item.price}</p>
                 </div>
+<button
+  onClick={() => {
+    const updatedWishlist =
+      wishlist.filter(
+        (_, i) => i !== index
+      );
+
+    setWishlist(updatedWishlist);
+
+    localStorage.setItem(
+      "wishlist",
+      JSON.stringify(updatedWishlist)
+    );
+  }}
+>
+  ❌ Remove
+</button>
               </div>
             ))
           )}
