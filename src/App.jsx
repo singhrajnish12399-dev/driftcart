@@ -110,6 +110,14 @@ category: "Electronics",
 ];
 
   const addCart = (item) => {
+  const alreadyExists = cart.find(
+    (product) => product.id === item.id
+  );
+
+  if (alreadyExists) {
+    return;
+  }
+
   const updatedCart = [...cart, item];
 
   setCart(updatedCart);
@@ -121,9 +129,15 @@ category: "Electronics",
 };
 
   const addWishlist = (item) => {
-  const updatedWishlist = [...wishlist];
+  const alreadyExists = wishlist.find(
+    (product) => product.id === item.id
+  );
 
-  updatedWishlist.push(item);
+  if (alreadyExists) {
+    return;
+  }
+
+  const updatedWishlist = [...wishlist, item];
 
   setWishlist(updatedWishlist);
 
