@@ -135,8 +135,12 @@ category: "Electronics",
           <button
             onClick={() => {
               if (tempName.trim()) {
-                setName(tempName);
-                setLoggedIn(true);
+  setName(tempName);
+  setLoggedIn(true);
+
+  localStorage.setItem("name", tempName);
+  localStorage.setItem("loggedIn", "true");
+}
               }
             }}
           >
