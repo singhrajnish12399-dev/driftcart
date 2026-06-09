@@ -225,6 +225,12 @@ category: "Electronics",
 
 {page === "home" && (
   <>
+<div className="banner">
+  <img
+    src={banners[currentBanner]}
+    alt="banner"
+  />
+</div>
 
 <div className="categories">
   <div
