@@ -348,3 +348,67 @@ body {
   border-radius: 14px;
   font-size: 15px;
 }
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.menu-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menu-icon {
+  font-size: 26px;
+  color: white;
+  cursor: pointer;
+}
+
+.menu-logo h2 {
+  color: white;
+  margin: 0;
+  font-size: 22px;
+}
+
+.menu-logo p {
+  color: rgba(255,255,255,0.8);
+  font-size: 11px;
+}
+
+.header-icons {
+  display: flex;
+  gap: 18px;
+}
+
+.header-icons div {
+  color: white;
+  font-size: 24px;
+  position: relative;
+  cursor: pointer;
+}
+
+.header-icons span {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: red;
+  color: white;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+}
