@@ -115,10 +115,10 @@ body {
 }
 
 .categories div {
-  min-width: 100px;
+  min-width: 110px;
   text-align: center;
   padding: 12px;
-  border-radius: 14px;
+  border-radius: 20px;
   background: white;
   font-size: 14px;
   font-weight: 600;
@@ -411,4 +411,15 @@ body {
   border: none;
   border-radius: 14px;
   font-size: 15px;
+}
+.categories {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 12px;
+  scrollbar-width: none;
+}
+
+.categories::-webkit-scrollbar {
+  display: none;
 }
