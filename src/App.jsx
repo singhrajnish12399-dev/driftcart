@@ -151,7 +151,11 @@ category: "Electronics",
     return (
       <div className="login-page">
         <div className="login-box">
-          <h1>🛒 DriftCart</h1>
+          <h1>
+  <span style={{ color: "#ffd600" }}>🛒</span>
+  <span style={{ color: "#2874f0" }}> Drift</span>
+  <span style={{ color: "#ffd600" }}>Cart</span>
+</h1>
 
           <p>India's Smart Shopping App</p>
 
