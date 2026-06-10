@@ -14,6 +14,3 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
 
-// Database ko export kiya taaki App.jsx ise use kar sake
-export const db = getFirestore(app);
-
