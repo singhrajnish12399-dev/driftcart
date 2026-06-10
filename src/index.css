@@ -304,14 +304,16 @@ body {
 }
 
 .menu-logo h2 {
-  color: white;
   margin: 0;
-  font-size: 22px;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }
 
 .menu-logo p {
-  color: rgba(255,255,255,0.8);
-  font-size: 11px;
+  color: rgba(255,255,255,0.85);
+  font-size: 12px;
+  margin-top: 2px;
 }
 
 .header-icons {
