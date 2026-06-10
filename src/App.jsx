@@ -1,494 +1,120 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "./firebaseConfig"; // Jo file aapne banayi thi
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa"; // Stars ke liye icons
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(
-  JSON.parse(localStorage.getItem("loggedIn")) || false
-);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-const [name, setName] = useState(
-  localStorage.getItem("name") || ""
-);
-
-const [tempName, setTempName] = useState("");
-
-const [page, setPage] = useState("home");
-
-const [search, setSearch] = useState("");
-
-const [selectedCategory, setSelectedCategory] = useState("All");
-
-const [cart, setCart] = useState(
-  JSON.parse(localStorage.getItem("cart")) || []
-);
-
-const [wishlist, setWishlist] = useState(
-  JSON.parse(localStorage.getItem("wishlist")) || []
-);
-
-  const banners = [
-    "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da",
-    "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
-    "https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
-  ];
-
-  const [currentBanner, setCurrentBanner] = useState(0);
-
+  // 1. Firebase Firestore se real products fetch karna
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentBanner((prev) => (prev + 1) % banners.length);
-    }, 3000);
+    const fetchProducts = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "products"));
+        const items = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setProducts(items);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching products: ", error);
+        setLoading(false);
+      }
+    };
 
-    return () => clearInterval(timer);
+    fetchProducts();
   }, []);
 
-  const products = [
-    {
-      id: 1,
-category: "Fashion",
-      name: "Premium T-Shirt",
-      price: 499,
-      image:
-        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab"
-    },
-    {
-      id: 2,
-category: "Fashion",
-      name: "Running Shoes",
-      price: 1499,
-      image:
-        "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
-    },
-    {
-      id: 3,
-category: "Electronics",
-      name: "Smart Watch",
-      price: 999,
-      image:
-        "https://images.unsplash.com/photo-1523170335258-f5ed11844a49"
-    },
-    {
-      id: 4,
-category: "Electronics",
-      name: "Headphones",
-      price: 1999,
-      image:
-        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
-    },
-    {
-      id: 5,
-category: "Electronics",
-      name: "Laptop",
-      price: 45999,
-      image:
-        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853"
-    },
-    {
-      
-  id: 6,
-  category: "Mobiles",
-  name: "Mobile Phone",
-  price: 15999,
-  image:
-    "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
-},
-{
-  id: 7,
-  category: "Beauty",
-  name: "Lipstick",
-  price: 299,
-  image:
-    "https://images.unsplash.com/photo-1586495777744-4413f21062fa"
-},
-{
-  id: 8,
-  category: "Beauty",
-  name: "Makeup Kit",
-  price: 999,
-  image:
-    "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9"
-}
-];
+  // 2. 'Buy Now' par Razorpay Checkout kholna
+  const handleBuyNow = (product) => {
+    const options = {
+      key: "YOUR_RAZORPAY_TEST_KEY_ID", // ⚠️ Isko apne Razorpay Dashboard wale Key ID se replace kar lena
+      amount: product.price * 100, // Razorpay paise me amount leta hai (₹499 = 49900 paise)
+      currency: "INR",
+      name: "DriftCart",
+      description: `Payment for ${product.name}`,
+      handler: function (response) {
+        // Payment successful hone par ye chalega
+        alert(`Payment Successful! Transaction ID: ${response.razorpay_payment_id}`);
+      },
+      prefill: {
+        name: "Test User",
+        email: "test@driftcart.com",
+        contact: "9999999999"
+      },
+      theme: {
+        color: "#2563EB" // DriftCart ka blue color
+      }
+    };
 
-  const addCart = (item) => {
-  const alreadyExists = cart.find(
-    (product) => product.id === item.id
-  );
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
 
-  if (alreadyExists) {
-    return;
-  }
+  // 3. Star Rating dikhane ke liye helper function
+  const RenderStars = ({ rating }) => {
+    const stars = [];
+    const productRating = rating || 4; // Agar database me rating na ho toh default 4 star dikhega
+    for (let i = 1; i <= 5; i++) {
+      if (i <= productRating) {
+        stars.push(<FaStar key={i} className="text-yellow-400" />);
+      } else if (i - 0.5 <= productRating) {
+        stars.push(<FaStarHalfAlt key={i} className="text-yellow-400" />);
+      } else {
+        stars.push(<FaRegStar key={i} className="text-gray-300" />);
+      }
+    }
+    return <div className="flex items-center gap-0.5">{stars}</div>;
+  };
 
-  const updatedCart = [...cart, item];
-
-  setCart(updatedCart);
-
-  localStorage.setItem(
-    "cart",
-    JSON.stringify(updatedCart)
-  );
-};
-
-  const addWishlist = (item) => {
-  const alreadyExists = wishlist.find(
-    (product) => product.id === item.id
-  );
-
-  if (alreadyExists) {
-    return;
-  }
-
-  const updatedWishlist = [...wishlist, item];
-
-  setWishlist(updatedWishlist);
-
-  localStorage.setItem(
-    "wishlist",
-    JSON.stringify(updatedWishlist)
-  );
-};
-
-  if (!loggedIn) {
-    return (
-      <div className="login-page">
-        <div className="login-box">
-          <h1>
-  <img
-    src="https://cdn-icons-png.flaticon.com/512/263/263142.png"
-    alt="cart"
-    style={{
-      width: "40px",
-      height: "40px",
-      marginRight: "6px",
-      verticalAlign: "middle"
-    }}
-  />
-
-  <span style={{ color: "#2874f0" }}>Drift</span>
-  <span style={{ color: "#ffd600" }}>Cart</span>
-</h1>
-
-          <p>India's Smart Shopping App</p>
-
-          <input
-            type="text"
-            placeholder="Enter your name"
-            value={tempName}
-            onChange={(e) => setTempName(e.target.value)}
-          />
-
-          <button
-            onClick={() => {
-              if (tempName.trim()) {
-  setName(tempName);
-  setLoggedIn(true);
-
-  localStorage.setItem("name", tempName);
-  localStorage.setItem("loggedIn", "true");
-}
-              
-            }}
-          >
-            Login / Signup
-          </button>
-        </div>
-      </div>
-    );
+  if (loading) {
+    return <div className="text-center mt-20 font-bold text-xl text-blue-600">DriftCart Products Loading...</div>;
   }
 
   return (
-    <div className="app">
-
-      <div className="header">
-
-  <div className="top-header">
-
-    <div className="menu-logo">
-  <div className="menu-icon">☰</div>
-
-  <div>
-    <h2>
-  <img
-    src="https://cdn-icons-png.flaticon.com/512/263/263142.png"
-    alt="cart"
-    style={{
-      width: "34px",
-      height: "34px",
-      marginRight: "6px",
-      verticalAlign: "middle"
-    }}
-  />
-
-  <span style={{ color: "#ffffff" }}>Drift</span>
-  <span style={{ color: "#ffd600" }}>Cart</span>
-</h2>
-
-    <p>Your Shopping Destination</p>
-  </div>
-</div>
-
-    <div className="header-icons">
-
-      <div onClick={() => setPage("wishlist")}>
-        ❤️
-        <span>{wishlist.length}</span>
+    <div className="bg-gray-50 min-h-screen pb-20">
+      {/* Top Navbar */}
+      <div className="bg-blue-600 p-4 text-white font-bold text-center text-xl shadow-md">
+        DriftCart
       </div>
 
-      <div onClick={() => setPage("cart")}>
-        🛒
-        <span>{cart.length}</span>
-      </div>
+      <div className="p-4">
+        <h2 className="text-lg font-bold mb-4 text-gray-800">Trending Products</h2>
+        
+        {/* Products Grid */}
+        <div className="grid grid-cols-2 gap-4">
+          {products.map((product) => (
+            <div key={product.id} className="border p-3 rounded-xl bg-white shadow-sm flex flex-col justify-between">
+              <div>
+                <img src={product.imageUrl} alt={product.name} className="w-full h-40 object-cover rounded-lg" />
+                <h3 className="font-bold mt-2 text-sm text-gray-800 line-clamp-1">{product.name}</h3>
+                
+                {/* Rating Component */}
+                <div className="my-1 flex items-center gap-1.5">
+                  <RenderStars rating={product.rating} />
+                  <span className="text-xs text-gray-500">({product.rating || 4})</span>
+                </div>
+              </div>
 
-    </div>
-
-  </div>
-
-  <input
-    className="search"
-    placeholder="Search for products, brands and more..."
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-  />
-
-
-          </div>
-
-{page === "home" && (
-  <>
-<div className="banner">
-  <img
-    src={banners[currentBanner]}
-    alt="banner"
-  />
-</div>
-
-<div className="categories">
-  <div
-    className={selectedCategory === "All" ? "active-category" : ""}
-    onClick={() => setSelectedCategory("All")}
-  >
-    🔥 All
-  </div>
-
-  <div
-    className={selectedCategory === "Mobiles" ? "active-category" : ""}
-    onClick={() => setSelectedCategory("Mobiles")}
-  >
-    📱 Mobiles
-  </div>
-
-  <div
-    className={selectedCategory === "Fashion" ? "active-category" : ""}
-    onClick={() => setSelectedCategory("Fashion")}
-  >
-    👕 Fashion
-  </div>
-
-  <div
-    className={selectedCategory === "Electronics" ? "active-category" : ""}
-    onClick={() => setSelectedCategory("Electronics")}
-  >
-    💻 Electronics
-  </div>
-<div
-  className={selectedCategory === "Beauty" ? "active-category" : ""}
-  onClick={() => setSelectedCategory("Beauty")}
->
-  💄 Beauty
-</div>
-</div>
-
-          <h3 className="section-title">
-            Trending Products
-          </h3>
-
-          <div className="product-grid">
-            {products
-              .filter(
-  (p) =>
-    p.name.toLowerCase().includes(search.toLowerCase()) &&
-    (selectedCategory === "All" ||
-      p.category === selectedCategory)
-)
-              
-              .map((product) => (
-                <div
-                  className="product-card"
-                  key={product.id}
+              <div>
+                <p className="text-green-600 font-bold mt-1">₹{product.price}</p>
+                
+                {/* Buy Now Button */}
+                <button 
+                  onClick={() => handleBuyNow(product)}
+                  className="w-full mt-2 bg-blue-600 text-white py-2 rounded-lg font-medium active:scale-95 transition-all text-sm shadow-sm"
                 >
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                  />
-
-                  <h4>{product.name}</h4>
-
-                  <p>₹{product.price}</p>
-
-                  <button
-                    onClick={() =>
-                      addCart(product)
-                    }
-                  >
-                    Add to Cart
-                  </button>
-
-                  <button
-                    className="wish-btn"
-                    onClick={() =>
-                      addWishlist(product)
-                    }
-                  >
-                    ❤️ Wishlist
-                  </button>
-                </div>
-              ))}
-          </div>
-        </>
-      )}{page === "cart" && (
-        <div className="page-box">
-          <h2>🛒 My Cart</h2>
-
-          {cart.length === 0 ? (
-            <p>Your cart is empty</p>
-          ) : (
-            cart.map((item, index) => (
-              <div className="list-item" key={index}>
-                <img src={item.image} alt="" />
-                <div>
-                  <h4>{item.name}</h4>
-                  <p>₹{item.price}</p>
-                </div>
-<button
-  onClick={() => {
-    const updatedCart = cart.filter(
-      (_, i) => i !== index
-    );
-
-    setCart(updatedCart);
-
-    localStorage.setItem(
-      "cart",
-      JSON.stringify(updatedCart)
-    );
-  }}
->
-  ❌ Remove
-</button>
+                  Buy Now
+                </button>
               </div>
-            ))
-          )}
-<h3 style={{ marginTop: "15px" }}>
-  Total: ₹
-  {cart.reduce(
-    (total, item) => total + item.price,
-    0
-  )}
-</h3>
+            </div>
+          ))}
         </div>
-      )}
-
-      {page === "wishlist" && (
-        <div className="page-box">
-          <h2>❤️ Wishlist</h2>
-
-          {wishlist.length === 0 ? (
-            <p>No wishlist items</p>
-          ) : (
-            wishlist.map((item, index) => (
-              <div className="list-item" key={index}>
-                <img src={item.image} alt="" />
-                <div>
-                  <h4>{item.name}</h4>
-                  <p>₹{item.price}</p>
-                </div>
-<button
-  onClick={() => {
-    const updatedWishlist =
-      wishlist.filter(
-        (_, i) => i !== index
-      );
-
-    setWishlist(updatedWishlist);
-
-    localStorage.setItem(
-      "wishlist",
-      JSON.stringify(updatedWishlist)
-    );
-  }}
->
-  ❌ Remove
-</button>
-              </div>
-            ))
-          )}
-        </div>
-      )}
-
-      {page === "account" && (
-        <div className="page-box">
-          <h2>👤 Account</h2>
-
-          <div className="account-card">
-            <h3>{name}</h3>
-            <p>Welcome to DriftCart</p>
-
-            <p>
-              Cart Items: <b>{cart.length}</b>
-            </p>
-
-            <p>
-              Wishlist Items: <b>{wishlist.length}</b>
-            </p>
-
-            <button
-              className="logout-btn"
-              onClick={() => {
-  localStorage.clear();
-
-  setLoggedIn(false);
-  setName("");
-  setCart([]);
-  setWishlist([]);
-  setPage("home");
-}}
-            >
-              Logout
-            </button>
-          </div>
-        </div>
-      )}
-
-      <div className="bottom-nav">
-        <button
-          onClick={() => setPage("home")}
-        >
-          🏠 Home
-        </button>
-
-        <button
-          onClick={() =>
-            setPage("wishlist")
-          }
-        >
-          ❤️ {wishlist.length}
-        </button>
-
-        <button
-          onClick={() => setPage("cart")}
-        >
-          🛒 {cart.length}
-        </button>
-
-        <button
-          onClick={() =>
-            setPage("account")
-          }
-        >
-          👤 Account
-        </button>
       </div>
     </div>
-  );
+   );
 }
 
 export default App;
