@@ -193,9 +193,10 @@ category: "Electronics",
 
   <div>
     <h2>
-      <span style={{ color: "#ffffff" }}>🛒 Drift</span>
-      <span style={{ color: "#ffd600" }}>Cart</span>
-    </h2>
+  <span style={{ color: "#ffd600", fontSize: "34px" }}>🛒</span>
+  <span style={{ color: "#ffffff" }}> Drift</span>
+  <span style={{ color: "#ffd600" }}>Cart</span>
+</h2>
 
     <p>Your Shopping Destination</p>
   </div>
