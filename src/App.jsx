@@ -152,8 +152,18 @@ category: "Electronics",
       <div className="login-page">
         <div className="login-box">
           <h1>
-  <span style={{ color: "#ffd600" }}>🛒</span>
-  <span style={{ color: "#2874f0" }}> Drift</span>
+  <img
+    src="https://cdn-icons-png.flaticon.com/512/263/263142.png"
+    alt="cart"
+    style={{
+      width: "40px",
+      height: "40px",
+      marginRight: "6px",
+      verticalAlign: "middle"
+    }}
+  />
+
+  <span style={{ color: "#2874f0" }}>Drift</span>
   <span style={{ color: "#ffd600" }}>Cart</span>
 </h1>
 
@@ -197,8 +207,18 @@ category: "Electronics",
 
   <div>
     <h2>
-  <span style={{ color: "#ffd600", fontSize: "34px" }}>🛒</span>
-  <span style={{ color: "#ffffff" }}> Drift</span>
+  <img
+    src="https://cdn-icons-png.flaticon.com/512/263/263142.png"
+    alt="cart"
+    style={{
+      width: "34px",
+      height: "34px",
+      marginRight: "6px",
+      verticalAlign: "middle"
+    }}
+  />
+
+  <span style={{ color: "#ffffff" }}>Drift</span>
   <span style={{ color: "#ffd600" }}>Cart</span>
 </h2>
 
