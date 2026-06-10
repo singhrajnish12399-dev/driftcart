@@ -2,52 +2,61 @@ import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
-// Main Component
+// Styling constants
+const colors = { primary: "#1A73E8", white: "#ffffff", gray: "#7F8C8D", red: "#E74C3C" };
+
 function App() {
   const [products, setProducts] = useState([]);
 
-  // Data Fetching
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchData = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "products"));
-        const data = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching: ", error);
-      }
+        setProducts(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+      } catch (e) { console.error("Error:", e); }
     };
-    fetchProducts();
+    fetchData();
   }, []);
 
   return (
-    <div style={{ backgroundColor: "#F6F6F6", minHeight: "100vh", fontFamily: "sans-serif" }}>
+    <div style={{ backgroundColor: "#F6F6F6", minHeight: "100vh", paddingBottom: "80px" }}>
       {/* Header */}
-      <div style={{ backgroundColor: "#1A73E8", padding: "15px", color: "white", textAlign: "center", fontSize: "20px", fontWeight: "bold" }}>
-        DriftCart
+      <div style={{ backgroundColor: colors.primary, padding: "15px", color: colors.white, position: "sticky", top: 0, zIndex: 1000 }}>
+        <h2 style={{ margin: 0, fontSize: "20px" }}>DriftCart</h2>
+        <p style={{ fontSize: "10px", margin: 0 }}>Your Shopping Destination</p>
       </div>
 
-      {/* Product List */}
-      <div style={{ padding: "15px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px" }}>
-        {products.map((p) => (
-          <div key={p.id} style={{ backgroundColor: "white", padding: "10px", borderRadius: "10px", boxShadow: "0 2px 5px rgba(0,0,0,0.1)" }}>
-            <img src={p.imageUrl} alt={p.name} style={{ width: "100%", borderRadius: "8px" }} />
-            <h3 style={{ fontSize: "14px", margin: "10px 0" }}>{p.name}</h3>
-            <p style={{ color: "green", fontWeight: "bold" }}>₹{p.price}</p>
-            <button style={{ width: "100%", padding: "8px", backgroundColor: "#1A73E8", color: "white", border: "none", borderRadius: "5px" }}>Add to Cart</button>
+      {/* Search Bar */}
+      <div style={{ padding: "15px" }}>
+        <input placeholder="Search products..." style={{ width: "100%", padding: "10px", borderRadius: "20px", border: "1px solid #ddd" }} />
+      </div>
+
+      {/* Categories */}
+      <div style={{ display: "flex", gap: "10px", padding: "0 15px", overflowX: "auto" }}>
+        {["All", "Mobiles", "Fashion", "Electronics"].map(cat => (
+          <button key={cat} style={{ padding: "8px 20px", borderRadius: "20px", border: "none", backgroundColor: cat === "All" ? colors.primary : colors.white }}>{cat}</button>
+        ))}
+      </div>
+
+      {/* Trending Products */}
+      <h3 style={{ padding: "15px" }}>Trending Products</h3>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px", padding: "0 15px" }}>
+        {products.map(p => (
+          <div key={p.id} style={{ backgroundColor: colors.white, padding: "10px", borderRadius: "10px" }}>
+            <img src={p.imageUrl} alt={p.name} style={{ width: "100%", height: "100px", objectFit: "cover", borderRadius: "5px" }} />
+            <p style={{ fontSize: "14px", fontWeight: "bold" }}>{p.name}</p>
+            <p style={{ color: "green" }}>₹{p.price}</p>
+            <button style={{ width: "100%", backgroundColor: colors.primary, color: colors.white, border: "none", padding: "5px", borderRadius: "5px" }}>Add to Cart</button>
           </div>
         ))}
       </div>
-      
-      {/* Bottom Nav Placeholder */}
-      <div style={{ position: "fixed", bottom: 0, width: "100%", padding: "15px", backgroundColor: "white", display: "flex", justifyContent: "space-around", boxShadow: "0 -2px 5px rgba(0,0,0,0.1)" }}>
-        <span>Home</span>
-        <span>Wishlist</span>
-        <span>Cart</span>
-        <span>Account</span>
+
+      {/* Bottom Nav */}
+      <div style={{ position: "fixed", bottom: 0, width: "100%", backgroundColor: colors.white, display: "flex", justifyContent: "space-around", padding: "15px", boxShadow: "0 -2px 5px rgba(0,0,0,0.1)" }}>
+        <span>🏠 Home</span>
+        <span>❤️ Wishlist</span>
+        <span>🛒 Cart</span>
+        <span>👤 Account</span>
       </div>
     </div>
   );
