@@ -189,13 +189,17 @@ category: "Electronics",
   <div className="top-header">
 
     <div className="menu-logo">
-      <div className="menu-icon">☰</div>
+  <div className="menu-icon">☰</div>
 
-      <div>
-        <h2>🛒 DriftCart</h2>
-        <p>Your Shopping Destination</p>
-      </div>
-    </div>
+  <div>
+    <h2>
+      <span style={{ color: "#ffffff" }}>🛒 Drift</span>
+      <span style={{ color: "#ffd600" }}>Cart</span>
+    </h2>
+
+    <p>Your Shopping Destination</p>
+  </div>
+</div>
 
     <div className="header-icons">
 
