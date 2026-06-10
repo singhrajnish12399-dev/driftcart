@@ -1,25 +1,24 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "./firebaseConfig"; // Jo file aapne banayi thi
-import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa"; // Stars ke liye icons
+import { db } from "./firebaseConfig";
 
 function App() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 1. Firebase Firestore se real products fetch karna
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        // Aapke database ke 'products' collection se connect ho raha hai
         const querySnapshot = await getDocs(collection(db, "products"));
-        const items = querySnapshot.docs.map(doc => ({
+        const data = querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data()
+          ...doc.data(),
         }));
-        setProducts(items);
+        setProducts(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching products: ", error);
+        console.error("Database fetch me error hai: ", error);
         setLoading(false);
       }
     };
@@ -27,94 +26,37 @@ function App() {
     fetchProducts();
   }, []);
 
-  // 2. 'Buy Now' par Razorpay Checkout kholna
-  const handleBuyNow = (product) => {
-    const options = {
-      key: "YOUR_RAZORPAY_TEST_KEY_ID", // ⚠️ Isko apne Razorpay Dashboard wale Key ID se replace kar lena
-      amount: product.price * 100, // Razorpay paise me amount leta hai (₹499 = 49900 paise)
-      currency: "INR",
-      name: "DriftCart",
-      description: `Payment for ${product.name}`,
-      handler: function (response) {
-        // Payment successful hone par ye chalega
-        alert(`Payment Successful! Transaction ID: ${response.razorpay_payment_id}`);
-      },
-      prefill: {
-        name: "Test User",
-        email: "test@driftcart.com",
-        contact: "9999999999"
-      },
-      theme: {
-        color: "#2563EB" // DriftCart ka blue color
-      }
-    };
-
-    const rzp = new window.Razorpay(options);
-    rzp.open();
-  };
-
-  // 3. Star Rating dikhane ke liye helper function
-  const RenderStars = ({ rating }) => {
-    const stars = [];
-    const productRating = rating || 4; // Agar database me rating na ho toh default 4 star dikhega
-    for (let i = 1; i <= 5; i++) {
-      if (i <= productRating) {
-        stars.push(<FaStar key={i} className="text-yellow-400" />);
-      } else if (i - 0.5 <= productRating) {
-        stars.push(<FaStarHalfAlt key={i} className="text-yellow-400" />);
-      } else {
-        stars.push(<FaRegStar key={i} className="text-gray-300" />);
-      }
-    }
-    return <div className="flex items-center gap-0.5">{stars}</div>;
-  };
-
   if (loading) {
-    return <div className="text-center mt-20 font-bold text-xl text-blue-600">DriftCart Products Loading...</div>;
+    return (
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", fontSize: "20px", fontFamily: "sans-serif" }}>
+        🔄 Products load ho rahe hain, kripya pratiksha karein...
+      </div>
+    );
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen pb-20">
-      {/* Top Navbar */}
-      <div className="bg-blue-600 p-4 text-white font-bold text-center text-xl shadow-md">
-        DriftCart
-      </div>
-
-      <div className="p-4">
-        <h2 className="text-lg font-bold mb-4 text-gray-800">Trending Products</h2>
-        
-        {/* Products Grid */}
-        <div className="grid grid-cols-2 gap-4">
-          {products.map((product) => (
-            <div key={product.id} className="border p-3 rounded-xl bg-white shadow-sm flex flex-col justify-between">
-              <div>
-                <img src={product.imageUrl} alt={product.name} className="w-full h-40 object-cover rounded-lg" />
-                <h3 className="font-bold mt-2 text-sm text-gray-800 line-clamp-1">{product.name}</h3>
-                
-                {/* Rating Component */}
-                <div className="my-1 flex items-center gap-1.5">
-                  <RenderStars rating={product.rating} />
-                  <span className="text-xs text-gray-500">({product.rating || 4})</span>
-                </div>
-              </div>
-
-              <div>
-                <p className="text-green-600 font-bold mt-1">₹{product.price}</p>
-                
-                {/* Buy Now Button */}
-                <button 
-                  onClick={() => handleBuyNow(product)}
-                  className="w-full mt-2 bg-blue-600 text-white py-2 rounded-lg font-medium active:scale-95 transition-all text-sm shadow-sm"
-                >
-                  Buy Now
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+    <div style={{ padding: "20px", fontFamily: "sans-serif", backgroundColor: "#121212", color: "white", minHeight: "100vh" }}>
+      <h1 style={{ textAlign: "center", color: "#4facfe" }}>Driftcart - Premium Store</h1>
+      
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "20px", marginTop: "30px" }}>
+        {products.map((product) => (
+          <div key={product.id} style={{ border: "1px solid #333", borderRadius: "10px", padding: "15px", backgroundColor: "#1e1e1e", textAlign: "center" }}>
+            <img 
+              src={product.imageUrl} 
+              alt={product.name} 
+              style={{ width: "100%", height: "200px", objectFit: "cover", borderRadius: "8px" }} 
+            />
+            <h3 style={{ margin: "10px 0" }}>{product.name}</h3>
+            <p style={{ color: "#ffb400", fontWeight: "bold", fontSize: "18px" }}>₹{product.price}</p>
+            <p style={{ color: "#aaa", fontSize: "14px" }}>⭐ {product.rating} / 5</p>
+            <button style={{ width: "100%", padding: "10px", backgroundColor: "#4facfe", color: "white", border: "none", borderRadius: "5px", fontWeight: "bold", cursor: "pointer", marginTop: "10px" }}>
+              Buy Now
+            </button>
+          </div>
+        ))}
       </div>
     </div>
-   );
+  );
 }
 
 export default App;
